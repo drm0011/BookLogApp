@@ -1,0 +1,31 @@
+﻿@page
+@model BookLogApp.Pages.AddBookModel
+@{
+    <h2>Add Book</h2>
+
+    <form method="post">
+        <div>
+            <label for="Title">Title:</label>
+            <input id="Title" name="Title" asp-for="Title" />
+        </div>
+
+        <div>
+            <label for="Author">Author:</label>
+            <input id="Author" name="Author" asp-for="Author" />
+        </div>
+
+        <div>
+            <label for="Summary">Summary:</label>
+            <textarea id="Summary" name="Summary" asp-for="Summary"></textarea>
+        </div>
+
+        <div>
+            <label for="ISBN">ISBN:</label>
+            <input id="ISBN" name="ISBN" asp-for="ISBN" />
+        </div>
+
+        <!-- Add other fields as necessary -->
+
+        <button type="submit">Add Book</button>
+    </form>
+}
