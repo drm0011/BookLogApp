@@ -26,7 +26,6 @@ namespace BookLogAppBLL
             if (isbn <= 0)
                 throw new ArgumentException("Invalid ISBN number");
 
-            // Any other business-specific validations can be added here.
 
             _bookRepo.CreateBook(title, author, summary, isbn);
         }
