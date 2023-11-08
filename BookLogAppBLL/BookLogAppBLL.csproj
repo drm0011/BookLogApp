@@ -44,7 +44,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Book.cs" />
     <Compile Include="BookBLL.cs" />
     <Compile Include="Mapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -53,6 +52,10 @@
     <ProjectReference Include="..\BookLogAppInterfaces\BookLogAppInterfaces.csproj">
       <Project>{6FB3C846-6ADA-4485-8D0D-A3AADEC9AB65}</Project>
       <Name>BookLogAppInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DomainModels\DomainModels.csproj">
+      <Project>{0EB54460-6BFD-435F-984D-0BAB2AFD9A01}</Project>
+      <Name>DomainModels</Name>
     </ProjectReference>
     <ProjectReference Include="..\DTOs\DTOs.csproj">
       <Project>{53832ff8-d8e6-4ee1-a93d-3acd042d75bd}</Project>

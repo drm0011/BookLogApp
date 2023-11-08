@@ -1,4 +1,6 @@
 ﻿using BookLogAppInterfaces;
+using DomainModels;
+using DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +30,20 @@ namespace BookLogAppBLL
 
 
             _bookRepo.CreateBook(title, author, summary, isbn);
+        }
+
+        public List<Book> GetBooks()
+        {
+            List<BookDTO> booksDTO = _bookRepo.GetBooks();
+            List<Book> books = new List<Book>();
+
+            // Correctly map each BookDTO to a Book domain model and add to the list
+            foreach (BookDTO bookDTO in booksDTO)
+            {
+                books.Add(Mapper.ToDomainModel(bookDTO));
+            }
+
+            return books;
         }
 
     }

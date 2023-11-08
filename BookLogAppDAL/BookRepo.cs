@@ -1,4 +1,5 @@
 ﻿using BookLogAppInterfaces;
+using DTOs;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -44,6 +45,33 @@ namespace BookLogAppDAL
             }
         }
 
+        public List<BookDTO> GetBooks()
+        {
+            List<BookDTO> bookList = new List<BookDTO>();
+            using (SqlConnection connection = new SqlConnection(GetConnString()))
+            {
+                connection.Open();
+                string sql = @"SELECT Id, Title, Author, Summary, ISBN FROM Books;";
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            bookList.Add(new BookDTO
+                            {
+                                ID = Convert.ToInt32(reader["Id"]),
+                                Title = reader["Title"].ToString(),
+                                Author = reader["Author"].ToString(),
+                                Summary = reader["Summary"].ToString(),
+                                ISBN = Convert.ToInt32(reader["ISBN"])
+                            });
+                        }
+                    }
+                }
+            }
+            return bookList;
+        }
 
     }
 }
