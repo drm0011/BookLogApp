@@ -37,7 +37,7 @@ namespace BookLogAppDAL
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception ex) //exception maken voor de ui
             {
                 // Handle the exception here
                 throw;
