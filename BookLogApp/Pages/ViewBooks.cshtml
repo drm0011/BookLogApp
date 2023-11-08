@@ -1,0 +1,15 @@
+﻿@page
+@model BookLogApp.Pages.ViewBooksModel
+<h2>Book List</h2>
+
+<ul>
+    @foreach (DomainModels.Book book in Model.Books)
+    {
+        <li>
+            <strong>Title:</strong> @book.Title <br />
+            <strong>Author:</strong> @book.Author <br />
+            <strong>Summary:</strong> @book.Summary <br />
+            <strong>ISBN:</strong> @book.ISBN
+        </li>
+    }
+</ul>
