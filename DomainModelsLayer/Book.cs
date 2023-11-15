@@ -14,28 +14,39 @@ namespace DomainModelsLayer
         public string Author { get; private set; }
         public int ISBN { get; private set; }
 
+
+        //constructor for creating book
         public Book(string title, string author, string summary, int isbn)
         {
-            SetBookDetails(title, author, summary);
-            ISBN = isbn;
-        }
-
-        public void SetBookDetails(string title, string author, string summary)
-        {
-            if (string.IsNullOrEmpty(title) || string.IsNullOrEmpty(author) ||
-                string.IsNullOrEmpty(summary))
-            {
-                throw new ArgumentException("Fill in the missing fields");
-            }
+            ValidateBookDetails(title, author, summary, isbn);
 
             Title = title;
             Summary = summary;
             Author = author;
+            ISBN = isbn;
         }
 
-        public void SetId(int id)
+        //constructor existing book
+        public Book(int id, string title, string author, string summary, int isbn) : this(title, author, summary, isbn)
         {
             ID = id;
         }
+
+        public void ValidateBookDetails(string title, string author, string summary, int isbn)
+        {
+            if (string.IsNullOrEmpty(title))
+            {
+                throw new ArgumentException("Title is empty.");
+            }
+            if (string.IsNullOrEmpty(author))
+            {
+                throw new ArgumentException("Author is empty.");
+            }
+            if (isbn <= 0)
+            {
+                throw new ArgumentException("Invalid ISBN.");
+            }
+        }
+
     }
 }
