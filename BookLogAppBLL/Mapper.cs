@@ -12,14 +12,10 @@ namespace BookLogAppBLL
     {
         public static Book ToDomainModel(BookDTO dto)
         {
-            return new Book
-            {
-                ID = dto.ID,
-                Title = dto.Title,
-                Summary = dto.Summary,
-                Author = dto.Author,
-                ISBN = dto.ISBN
-            };
+            Book book = new Book(dto.Title, dto.Author,dto.Summary,dto.ISBN);
+            book.SetId(dto.ID);
+            return book;
+
         }
 
         public static BookDTO ToDTO(Book domainModel)

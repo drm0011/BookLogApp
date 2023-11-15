@@ -8,25 +8,34 @@ namespace DomainModels
 {
     public class Book
     {
-        public int ID { get; set; }
+        public int ID { get; private set; }
         public string Title { get; private set; }
-        public string Summary { get; set; }
-        public string Author { get; set; }
-        public int ISBN { get; set; }
+        public string Summary { get; private set; }
+        public string Author { get; private set; }
+        public int ISBN { get; private set; }
 
         public Book(string title, string author, string summary, int isbn)
         {
-            SetTitle(title);
+            SetBookDetails(title, author, summary);
+            ISBN = isbn;
         }
 
-        public void SetTitle(string title)
+        public void SetBookDetails(string title, string author, string summary)
         {
-            if (string.IsNullOrEmpty(title))
+            if (string.IsNullOrEmpty(title) || string.IsNullOrEmpty(author) || 
+                string.IsNullOrEmpty(summary))
             {
-                throw new ArgumentException("Title is empty!");
+                throw new ArgumentException("Fill in the missing fields");
             }
 
             Title = title;
+            Summary = summary;
+            Author = author;
+        }
+
+        public void SetId(int id)
+        {
+            ID = id;
         }
     }
 }
