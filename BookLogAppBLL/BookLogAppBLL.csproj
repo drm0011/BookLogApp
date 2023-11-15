@@ -53,9 +53,9 @@
       <Project>{6FB3C846-6ADA-4485-8D0D-A3AADEC9AB65}</Project>
       <Name>BookLogAppInterfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DomainModels\DomainModels.csproj">
-      <Project>{0EB54460-6BFD-435F-984D-0BAB2AFD9A01}</Project>
-      <Name>DomainModels</Name>
+    <ProjectReference Include="..\DomainModelsLayer\DomainModelsLayer.csproj">
+      <Project>{c0cb3801-bd15-4544-825f-4e3e51146791}</Project>
+      <Name>DomainModelsLayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\DTOs\DTOs.csproj">
       <Project>{53832ff8-d8e6-4ee1-a93d-3acd042d75bd}</Project>
