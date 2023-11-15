@@ -20,15 +20,6 @@ namespace BookLogAppBLL
 
         public void CreateBook(string title, string author, string summary, int isbn)
         {
-            // Simple validation
-            if (string.IsNullOrEmpty(title))
-                throw new ArgumentException("Title cannot be empty");
-            if (string.IsNullOrEmpty(author))
-                throw new ArgumentException("Author cannot be empty");
-            if (isbn <= 0)
-                throw new ArgumentException("Invalid ISBN number");
-
-
             _bookRepo.CreateBook(title, author, summary, isbn);
         }
 
