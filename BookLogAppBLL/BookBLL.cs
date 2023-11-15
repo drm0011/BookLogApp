@@ -20,7 +20,8 @@ namespace BookLogAppBLL
 
         public void CreateBook(string title, string author, string summary, int isbn)
         {
-            _bookRepo.CreateBook(title, author, summary, isbn);
+            Book book = new Book(title, author, summary, isbn);
+            _bookRepo.CreateBook(book.Title, book.Author, book.Summary, book.ISBN);
         }
 
         public List<Book> GetBooks()
