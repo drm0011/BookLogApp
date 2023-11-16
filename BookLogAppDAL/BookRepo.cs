@@ -24,37 +24,39 @@ namespace BookLogAppDAL
                 using (SqlConnection connection = new SqlConnection(GetConnString()))
                 {
                     connection.Open();
-
                     string sql = @"INSERT INTO Books (Title, Author, Summary, ISBN) 
                            VALUES (@Title, @Author, @Summary, @ISBN);";
 
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
-                        command.Parameters.AddWithValue("@Title", title);
-                        command.Parameters.AddWithValue("@Author", author);
-                        command.Parameters.AddWithValue("@Summary", summary);
-                        command.Parameters.AddWithValue("@ISBN", isbn);
+                        command.Parameters.Add("@Title", SqlDbType.VarChar).Value = title;
+                        command.Parameters.Add("@Author", SqlDbType.VarChar).Value = author;
+                        command.Parameters.Add("@Summary", SqlDbType.VarChar).Value = summary;
+                        command.Parameters.Add("@ISBN", SqlDbType.VarChar).Value = isbn;
 
-                        command.ExecuteNonQuery(); // Execute the SQL command
+                        command.ExecuteNonQuery();
                     }
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
-                // Handle the exception here
-                throw;
+                // Log the exception and rethrow a custom exception or handle it as needed
+                throw new ApplicationException("Error occurred while creating the book", ex);
             }
         }
+
 
         public List<BookDTO> GetBooks()
         {
             List<BookDTO> bookList = new List<BookDTO>();
-            using (SqlConnection connection = new SqlConnection(GetConnString()))
+            try
             {
-                connection.Open();
-                string sql = @"SELECT Id, Title, Author, Summary, ISBN FROM Books;";
-                using (SqlCommand command = new SqlCommand(sql, connection))
+                using (SqlConnection connection = new SqlConnection(GetConnString()))
                 {
+                    connection.Open();
+                    string sql = @"SELECT Id, Title, Author, Summary, ISBN FROM Books;";
+
+                    using (SqlCommand command = new SqlCommand(sql, connection))
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
@@ -71,8 +73,15 @@ namespace BookLogAppDAL
                     }
                 }
             }
+            catch (SqlException ex)
+            {
+                // Log the exception details
+                throw new ApplicationException("Error occurred while retrieving books", ex);
+            }
+
             return bookList;
         }
+
 
         public void UpdateBook(BookDTO bookDTO)
         {
