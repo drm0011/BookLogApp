@@ -20,8 +20,17 @@ namespace BookLogAppBLL
 
         public void CreateBook(string title, string author, string summary, int isbn)
         {
-            Book book = new Book(title, author, summary, isbn);
-            _bookRepo.CreateBook(book.Title, book.Author, book.Summary, book.ISBN);
+
+            try
+            {
+                Book book = new Book(title, author, summary, isbn);
+                _bookRepo.CreateBook(book.Title, book.Author, book.Summary, book.ISBN);
+            }
+            catch (ArgumentException ex)
+            {
+
+                throw new ArgumentException("An error occurred while creating the book: " + ex.Message);
+            }
         }
 
         public List<Book> GetBooks()

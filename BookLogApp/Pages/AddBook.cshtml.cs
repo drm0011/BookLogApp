@@ -40,10 +40,22 @@ namespace BookLogApp.Pages
                 return Page();
             }
 
-            //BLL method to create the book
-            _bookBLL.CreateBook(Title, Author, Summary, ISBN);
+            
 
-            return RedirectToPage("/Index"); 
+            try
+            {
+                //BLL method to create the book
+                _bookBLL.CreateBook(Title, Author, Summary, ISBN);
+
+                return RedirectToPage("/Index");
+            }
+            catch (ArgumentException ex)
+            {
+
+                // Add the error to the ModelState to display in the view
+                ModelState.AddModelError(string.Empty, ex.Message);
+                return Page();
+            }
         }
     }
 }
