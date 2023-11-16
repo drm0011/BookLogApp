@@ -18,7 +18,7 @@ namespace BookLogAppBLL
             _bookRepo = bookRepo;
         }
 
-        public void CreateBook(string title, string author, string summary, int isbn)
+        public void CreateBook(string title, string author, string summary, string isbn)
         {
 
             try

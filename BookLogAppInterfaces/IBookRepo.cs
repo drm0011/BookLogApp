@@ -9,7 +9,7 @@ namespace BookLogAppInterfaces
 {
     public interface IBookRepo
     {
-        void CreateBook(string title, string author, string summary, int isbn);
+        void CreateBook(string title, string author, string summary, string isbn);
         List<BookDTO> GetBooks();
     }
 }

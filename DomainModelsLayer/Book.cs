@@ -12,11 +12,11 @@ namespace DomainModelsLayer
         public string Title { get; private set; }
         public string Summary { get; private set; }
         public string Author { get; private set; }
-        public int ISBN { get; private set; }
+        public string ISBN { get; private set; }
 
 
         //constructor for creating book
-        public Book(string title, string author, string summary, int isbn)
+        public Book(string title, string author, string summary, string isbn)
         {
             ValidateBookDetails(title, author, summary, isbn);
 
@@ -27,12 +27,12 @@ namespace DomainModelsLayer
         }
 
         //constructor existing book
-        public Book(int id, string title, string author, string summary, int isbn) : this(title, author, summary, isbn)
+        public Book(int id, string title, string author, string summary, string isbn) : this(title, author, summary, isbn)
         {
             ID = id;
         }
 
-        public void ValidateBookDetails(string title, string author, string summary, int isbn)
+        public void ValidateBookDetails(string title, string author, string summary, string isbn)
         {
             if (string.IsNullOrEmpty(title))
             {
@@ -42,7 +42,7 @@ namespace DomainModelsLayer
             {
                 throw new ArgumentException("Author is empty.");
             }
-            if (isbn <= 0) //TODO: further validation for ISBN 
+            if (string.IsNullOrEmpty(ISBN)) //TODO: further validation for ISBN 
             {
                 throw new ArgumentException("Invalid ISBN.");
             }

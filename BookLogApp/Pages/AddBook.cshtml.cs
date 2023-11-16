@@ -27,7 +27,7 @@ namespace BookLogApp.Pages
         public string Summary { get; set; }
 
         [BindProperty]
-        public int ISBN { get; set; }
+        public string ISBN { get; set; }
 
         public void OnGet()
         {

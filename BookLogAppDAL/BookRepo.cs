@@ -2,6 +2,7 @@
 using DTOs;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -72,6 +73,44 @@ namespace BookLogAppDAL
             }
             return bookList;
         }
+
+        public void UpdateBook(BookDTO bookDTO)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(GetConnString()))
+                {
+                    connection.Open();
+                    string sql = @"UPDATE Book
+                           SET Title=@Title,
+                               Summary=@Summary,
+                               Author=@Author,
+                               ISBN=@ISBN
+                           WHERE Id=@Id";
+
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.Parameters.Add("@Title", SqlDbType.VarChar).Value = bookDTO.Title;
+                        command.Parameters.Add("@Summary", SqlDbType.VarChar).Value = bookDTO.Summary;
+                        command.Parameters.Add("@Author", SqlDbType.VarChar).Value = bookDTO.Author;
+                        command.Parameters.Add("@ISBN", SqlDbType.VarChar).Value = bookDTO.ISBN;
+                        command.Parameters.Add("@Id", SqlDbType.Int).Value = bookDTO.ID;
+
+                        int affectedRows = command.ExecuteNonQuery();
+                        if (affectedRows == 0)
+                        {
+                            // Log and handle the situation when no rows are affected
+                        }
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                // Log the exception details
+                throw new ApplicationException("Error occurred in updating the book", ex);
+            }
+        }
+
 
     }
 }
