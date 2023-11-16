@@ -42,7 +42,7 @@ namespace DomainModelsLayer
             {
                 throw new ArgumentException("Author is empty.");
             }
-            if (string.IsNullOrEmpty(ISBN)) //TODO: further validation for ISBN 
+            if (string.IsNullOrEmpty(isbn)) //TODO: further validation for ISBN 
             {
                 throw new ArgumentException("Invalid ISBN.");
             }

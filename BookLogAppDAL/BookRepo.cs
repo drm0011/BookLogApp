@@ -17,7 +17,7 @@ namespace BookLogAppDAL
             return connName;
         }
 
-        public void CreateBook(string title, string author, string summary, int isbn)
+        public void CreateBook(string title, string author, string summary, string isbn)
         {
             try
             {
@@ -65,7 +65,7 @@ namespace BookLogAppDAL
                                 Title = reader["Title"].ToString(),
                                 Author = reader["Author"].ToString(),
                                 Summary = reader["Summary"].ToString(),
-                                ISBN = Convert.ToInt32(reader["ISBN"])
+                                ISBN = reader["ISBN"].ToString()
                             });
                         }
                     }
