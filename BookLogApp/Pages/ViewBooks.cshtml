@@ -6,10 +6,11 @@
     @foreach (DomainModelsLayer.Book book in Model.Books)
     {
         <li>
-            <strong>Title:</strong> @book.Title <br />
+            <a href="./UpdateBook/@book.ID"><strong>Title:</strong> @book.Title <br /></a>
             <strong>Author:</strong> @book.Author <br />
             <strong>Summary:</strong> @book.Summary <br />
-            <strong>ISBN:</strong> @book.ISBN
+            <strong>ISBN:</strong> @book.ISBN <br/>
+
         </li>
     }
 </ul>
