@@ -17,6 +17,7 @@ namespace BookLogAppDAL
             return connName;
         }
 
+        #region book data functions
         public void CreateBook(string title, string author, string summary, string isbn)
         {
             try
@@ -108,7 +109,7 @@ namespace BookLogAppDAL
                         int affectedRows = command.ExecuteNonQuery();
                         if (affectedRows == 0)
                         {
-                            // Log and handle the situation when no rows are affected
+                            //log and handle the situation when no rows are affected
                         }
                     }
                 }
@@ -120,6 +121,49 @@ namespace BookLogAppDAL
             }
         }
 
+
+        public BookDTO GetBookById(int id)
+        {
+            BookDTO bookDTO = null;  //initialize to null, remains null if no book found
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(GetConnString()))
+                {
+                    connection.Open();
+                    string sql = @"SELECT Id, Title, Author, Summary, ISBN FROM Books WHERE Id = @Id";
+
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.Parameters.Add("@Id", SqlDbType.Int).Value = id;
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read()) //if a book is found
+                            {
+                                bookDTO = new BookDTO
+                                {
+                                    ID = Convert.ToInt32(reader["Id"]),
+                                    Title = reader["Title"].ToString(),
+                                    Author = reader["Author"].ToString(),
+                                    Summary = reader["Summary"].ToString(),
+                                    ISBN = reader["ISBN"].ToString()
+                                };
+                            }
+                        }
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                // Log the exception details
+                throw new ApplicationException("Error occurred in retrieving the book", ex);
+            }
+
+            return bookDTO; //if no book found=null, if book found return BookDTO
+        }
+
+
+        #endregion
 
     }
 }

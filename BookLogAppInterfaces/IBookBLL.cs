@@ -1,4 +1,5 @@
 ﻿using DomainModelsLayer;
+using DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,8 @@ namespace BookLogAppInterfaces
     {
         void CreateBook(string title, string author, string summary, string isbn);
         List<Book> GetBooks();
+        void UpdateBook(Book book);
+        Book GetBookById(int id);
+
     }
 }

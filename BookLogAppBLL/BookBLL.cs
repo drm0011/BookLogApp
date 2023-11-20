@@ -18,6 +18,7 @@ namespace BookLogAppBLL
             _bookRepo = bookRepo;
         }
 
+        #region book crud methods
         public void CreateBook(string title, string author, string summary, string isbn)
         {
 
@@ -47,5 +48,30 @@ namespace BookLogAppBLL
             return books;
         }
 
+        public void UpdateBook(Book book)
+        {
+            try
+            {
+                _bookRepo.UpdateBook(Mapper.ToDTO(book));
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public Book GetBookById(int id)
+        {
+            BookDTO bookDTO = _bookRepo.GetBookById(id);
+            if (bookDTO != null)
+            {
+                return Mapper.ToDomainModel(bookDTO);
+            }
+
+            return null; //return null if no book is found
+        }
+
+        #endregion
     }
 }

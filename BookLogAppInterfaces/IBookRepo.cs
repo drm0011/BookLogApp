@@ -11,5 +11,7 @@ namespace BookLogAppInterfaces
     {
         void CreateBook(string title, string author, string summary, string isbn);
         List<BookDTO> GetBooks();
+        void UpdateBook(BookDTO bookDTO);
+        BookDTO GetBookById(int id);
     }
 }
