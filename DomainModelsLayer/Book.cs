@@ -15,6 +15,7 @@ namespace DomainModelsLayer
         public string ISBN { get; private set; }
 
 
+        public Book() { }
         //constructor for creating book
         public Book(string title, string author, string summary, string isbn)
         {
