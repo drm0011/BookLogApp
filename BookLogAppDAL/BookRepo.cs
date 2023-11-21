@@ -94,8 +94,7 @@ namespace BookLogAppDAL
                     string sql = @"UPDATE Book
                            SET Title=@Title,
                                Summary=@Summary,
-                               Author=@Author,
-                               ISBN=@ISBN
+                               Author=@Author
                            WHERE Id=@Id";
 
                     using (SqlCommand command = new SqlCommand(sql, connection))
@@ -103,7 +102,6 @@ namespace BookLogAppDAL
                         command.Parameters.Add("@Title", SqlDbType.VarChar).Value = bookDTO.Title;
                         command.Parameters.Add("@Summary", SqlDbType.VarChar).Value = bookDTO.Summary;
                         command.Parameters.Add("@Author", SqlDbType.VarChar).Value = bookDTO.Author;
-                        command.Parameters.Add("@ISBN", SqlDbType.VarChar).Value = bookDTO.ISBN;
                         command.Parameters.Add("@Id", SqlDbType.Int).Value = bookDTO.ID;
 
                         int affectedRows = command.ExecuteNonQuery();
