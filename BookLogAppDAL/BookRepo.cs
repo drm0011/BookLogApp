@@ -84,14 +84,14 @@ namespace BookLogAppDAL
         }
 
 
-        public void UpdateBook(BookDTO bookDTO)
+        public void UpdateBook(int id, string title, string author, string summary)
         {
             try
             {
                 using (SqlConnection connection = new SqlConnection(GetConnString()))
                 {
                     connection.Open();
-                    string sql = @"UPDATE Book
+                    string sql = @"UPDATE Books
                            SET Title=@Title,
                                Summary=@Summary,
                                Author=@Author
@@ -99,10 +99,10 @@ namespace BookLogAppDAL
 
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
-                        command.Parameters.Add("@Title", SqlDbType.VarChar).Value = bookDTO.Title;
-                        command.Parameters.Add("@Summary", SqlDbType.VarChar).Value = bookDTO.Summary;
-                        command.Parameters.Add("@Author", SqlDbType.VarChar).Value = bookDTO.Author;
-                        command.Parameters.Add("@Id", SqlDbType.Int).Value = bookDTO.ID;
+                        command.Parameters.Add("@Title", SqlDbType.VarChar).Value = title;
+                        command.Parameters.Add("@Summary", SqlDbType.VarChar).Value = summary;
+                        command.Parameters.Add("@Author", SqlDbType.VarChar).Value = author;
+                        command.Parameters.Add("@Id", SqlDbType.Int).Value = id;
 
                         int affectedRows = command.ExecuteNonQuery();
                         if (affectedRows == 0)

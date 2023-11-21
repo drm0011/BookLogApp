@@ -52,7 +52,7 @@ namespace BookLogAppBLL
         {
             try
             {
-                _bookRepo.UpdateBook(Mapper.ToDTO(book));
+                _bookRepo.UpdateBook(book.ID, book.Title, book.Author, book.Summary);
             }
             catch (Exception)
             {

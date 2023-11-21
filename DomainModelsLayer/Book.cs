@@ -8,11 +8,11 @@ namespace DomainModelsLayer
 {
     public class Book
     {
-        public int ID { get; private set; }
-        public string Title { get; private set; }
-        public string Summary { get; private set; }
-        public string Author { get; private set; }
-        public string ISBN { get; private set; }
+        public int ID { get; set; }
+        public string Title { get; set; }
+        public string Summary { get; set; }
+        public string Author { get; set; }
+        public string ISBN { get; set; }
 
 
         public Book() { }
