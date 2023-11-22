@@ -72,6 +72,19 @@ namespace BookLogAppBLL
             return null; //return null if no book is found
         }
 
+        public void DeleteBook(int id)
+        {
+            try
+            {
+                _bookRepo.DeleteBook(id);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         #endregion
     }
 }

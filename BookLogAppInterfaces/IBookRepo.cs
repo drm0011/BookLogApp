@@ -13,5 +13,6 @@ namespace BookLogAppInterfaces
         List<BookDTO> GetBooks();
         void UpdateBook(int id, string title, string author, string summary);
         BookDTO GetBookById(int id);
+        void DeleteBook(int id);
     }
 }

@@ -160,6 +160,33 @@ namespace BookLogAppDAL
             return bookDTO; //if no book found=null, if book found return BookDTO
         }
 
+        public void DeleteBook(int id)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(GetConnString()))
+                {
+                    connection.Open();
+                    string sql = @"DELETE FROM Books WHERE Id=@Id";
+
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.Parameters.Add("@Id", SqlDbType.Int).Value = id;
+
+                        int affectedRows = command.ExecuteNonQuery();
+                        if (affectedRows == 0)
+                        {
+                            // Log and handle the situation when no rows are affected
+                            // This means no book was found with the given ID
+                        }
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw new ApplicationException("Error occurred in deleting the book", ex);
+            }
+        }
 
         #endregion
 
