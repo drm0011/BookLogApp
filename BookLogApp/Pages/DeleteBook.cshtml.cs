@@ -6,20 +6,20 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace BookLogApp.Pages
 {
-    public class ViewBooksModel : PageModel
+    public class DeleteBookModel : PageModel
     {
+        //prevent navigation through url to this page
         private readonly IBookBLL _bookBLL;
 
-        public ViewBooksModel()
+        public DeleteBookModel()
         {
             _bookBLL=BookFactory.CreateBookBLL();
         }
-        public List<Book> Books { get; set; }   
-        public void OnGet()
+        public Book Book { get; set; }
+        public IActionResult OnGet(int id)
         {
-            Books=_bookBLL.GetBooks();
+            _bookBLL.DeleteBook(id);
+            return RedirectToPage("./ViewBooks");
         }
-
-
     }
 }
