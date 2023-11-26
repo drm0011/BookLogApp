@@ -1,0 +1,17 @@
+﻿@page
+@model BookLogApp.Pages.ViewBooksModel
+<h2>Book List</h2>
+
+<ul>
+    @foreach (DomainModelsLayer.Book book in Model.Books)
+    {
+        <li>
+            <a href="./UpdateBook/@book.ID"><strong>Title:</strong> @book.Title <br /></a>
+            <strong>Author:</strong> @book.Author <br />
+            <strong>Summary:</strong> @book.Summary <br />
+            <strong>ISBN:</strong> @book.ISBN <br/>
+            <a href="./DeleteBook/@book.ID">Delete @book.Title</a>
+
+        </li>
+    }
+</ul>

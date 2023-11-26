@@ -1,0 +1,26 @@
+﻿@page "{id:int}"
+@model BookLogApp.Pages.UpdateBookModel
+
+<h2>Update @Model.Book.Title</h2>
+
+<form method="post">
+    <input type="hidden" asp-for="Book.ID" />
+
+    <div>
+        <label for="Title">Title:</label>
+        <!-- Ensure the asp-for tag helper is correctly used for model binding -->
+        <input id="Title" asp-for="Book.Title" />
+    </div>
+
+    <div>
+        <label for="Author">Author:</label>
+        <input id="Author" asp-for="Book.Author" />
+    </div>
+
+    <div>
+        <label for="Summary">Summary:</label>
+        <textarea id="Summary" asp-for="Book.Summary"></textarea>
+    </div>
+
+    <button type="submit">Update @Model.Book.Title</button>
+</form>

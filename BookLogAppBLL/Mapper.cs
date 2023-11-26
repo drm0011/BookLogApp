@@ -1,4 +1,5 @@
-﻿using DTOs;
+﻿using DomainModelsLayer;
+using DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,14 +12,9 @@ namespace BookLogAppBLL
     {
         public static Book ToDomainModel(BookDTO dto)
         {
-            return new Book
-            {
-                ID = dto.ID,
-                Title = dto.Title,
-                Summary = dto.Summary,
-                Author = dto.Author,
-                ISBN = dto.ISBN
-            };
+            Book book = new Book(dto.ID, dto.Title, dto.Author, dto.Summary, dto.ISBN);
+            return book;
+
         }
 
         public static BookDTO ToDTO(Book domainModel)
