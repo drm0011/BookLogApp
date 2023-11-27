@@ -4,7 +4,7 @@ using DomainModelsLayer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace BookLogApp.Pages
+namespace BookLogApp.Pages.PagesForBooks
 {
     public class ViewBooksModel : PageModel
     {
@@ -12,12 +12,12 @@ namespace BookLogApp.Pages
 
         public ViewBooksModel()
         {
-            _bookBLL=BookFactory.CreateBookBLL();
+            _bookBLL = Factory.CreateBookBLL();
         }
-        public List<Book> Books { get; set; }   
+        public List<Book> Books { get; set; }
         public void OnGet()
         {
-            Books=_bookBLL.GetBooks();
+            Books = _bookBLL.GetBooks();
         }
 
 

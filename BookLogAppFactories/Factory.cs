@@ -9,11 +9,16 @@ using System.Threading.Tasks;
 
 namespace BookLogAppFactories
 {
-    public class BookFactory
+    public class Factory
     {
         public static IBookBLL CreateBookBLL()
         {
             return new BookBLL(new BookRepo());
+        }
+
+        public static IGenreBLL CreateGenreBLL()
+        {
+            return new GenreBLL(new GenreRepo());
         }
     }
 }

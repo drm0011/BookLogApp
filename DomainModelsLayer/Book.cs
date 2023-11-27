@@ -14,7 +14,7 @@ namespace DomainModelsLayer
         public string Author { get; set; }
         public string ISBN { get; set; }
 
-        //TODO: add update method, private setters
+        //TODO: add update method, private setters <---------------
 
         //constructor update form binding
         public Book() { }

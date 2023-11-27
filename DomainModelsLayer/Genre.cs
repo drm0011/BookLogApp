@@ -11,6 +11,9 @@ namespace DomainModelsLayer
         public int ID { get; set; }
         public string Name { get; set; }
 
+        //TODO: add update method, private setters <---------------
+
+
         public Genre()
         {
             
