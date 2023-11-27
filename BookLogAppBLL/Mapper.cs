@@ -28,5 +28,20 @@ namespace BookLogAppBLL
                 ISBN = domainModel.ISBN
             };
         }
+
+        public static Genre ToDomainModel(GenreDTO dto)
+        {
+            Genre genre = new Genre(dto.ID, dto.Name);
+            return genre;
+        }
+
+        public static GenreDTO ToDTO(GenreDTO domainModel)
+        {
+            return new GenreDTO
+            {
+                ID = domainModel.ID,
+                Name = domainModel.Name,
+            };
+        }
     }
 }

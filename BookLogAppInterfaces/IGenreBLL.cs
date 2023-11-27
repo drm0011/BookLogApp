@@ -1,0 +1,19 @@
+﻿using DomainModelsLayer;
+using DTOs;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BookLogAppInterfaces
+{
+    public interface IGenreBLL
+    {
+        void CreateGenre(string name);
+        List<Genre> GetGenres();
+        void UpdateGenre(int id, string name);
+        Genre GetGenreById(int id);
+        void DeleteGenre(int id);
+    }
+}

@@ -46,6 +46,8 @@
   <ItemGroup>
     <Compile Include="IBookBLL.cs" />
     <Compile Include="IBookRepo.cs" />
+    <Compile Include="IGenreBLL.cs" />
+    <Compile Include="IGenreRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
