@@ -1,4 +1,16 @@
-﻿@page
+﻿@page "{id:int}"
 @model BookLogApp.Pages.PagesForGenres.UpdateGenreModel
-@{
-}
+
+<h2>Update @Model.Genre.Name</h2>
+
+<form method="post">
+    <input type="hidden" asp-for="Genre.ID" />
+
+    <div>
+        <label for="Name">Name:</label>
+        <input id="Name" asp-for="Genre.Name" />
+    </div>
+
+    <button type="submit">Update @Model.Genre.Name</button>
+</form>
+

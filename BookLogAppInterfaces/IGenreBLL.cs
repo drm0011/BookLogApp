@@ -12,7 +12,7 @@ namespace BookLogAppInterfaces
     {
         void CreateGenre(string name);
         List<Genre> GetGenres();
-        void UpdateGenre(int id, string name);
+        void UpdateGenre(Genre genre);
         Genre GetGenreById(int id);
         void DeleteGenre(int id);
     }

@@ -51,9 +51,9 @@ namespace BookLogAppBLL
             return genres;
         }
 
-        public void UpdateGenre(int id, string name)
+        public void UpdateGenre(Genre genre)
         {
-            _genreRepo.UpdateGenre(id, name);   
+            _genreRepo.UpdateGenre(genre.ID, genre.Name);   
         }
     }
 }
