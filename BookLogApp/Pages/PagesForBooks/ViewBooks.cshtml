@@ -10,10 +10,15 @@
             <strong>Author:</strong> @book.Author <br />
             <strong>Summary:</strong> @book.Summary <br />
             <strong>ISBN:</strong> @book.ISBN <br/>
-            @foreach(DomainModelsLayer.Genre genre in book.Genres)
+            <strong>Genre: </strong>
+            @for(int i=0; i < book.Genres.Count; i++)
             {
-                <strong>Genre: </strong>@genre.Name<br/>
+                @book.Genres[i].Name
+                if(i<book.Genres.Count-1){
+                    @:|
+                }
             }
+            <br/>
             <a href="./DeleteBook/@book.ID">Delete @book.Title</a>
         </li>
     }
