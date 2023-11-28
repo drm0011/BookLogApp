@@ -1,6 +1,7 @@
 using BookLogApp.ViewModels;
 using BookLogAppFactories;
 using BookLogAppInterfaces;
+using DomainModelsLayer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -11,7 +12,8 @@ namespace BookLogApp.Pages
         private readonly IBookBLL _bookBLL;
         private readonly IGenreBLL _genreBLL;
 
-        public BooksGenre ViewModel { get; set; }
+        public List<Book> Books { get; set; }
+        public List<Genre> Genres { get; set;}
         [BindProperty]
         public int SelectedBookId { get; set; }
         [BindProperty]
@@ -24,11 +26,8 @@ namespace BookLogApp.Pages
 
         public void OnGet()
         {
-            ViewModel = new BooksGenre
-            {
-                Books = _bookBLL.GetBooks(),
-                Genres = _genreBLL.GetGenres()
-            };
+            Books = _bookBLL.GetBooks();
+            Genres = _genreBLL.GetGenres();
         }
 
         public IActionResult OnPost()

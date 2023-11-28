@@ -8,13 +8,13 @@
         <label>
             Select book:
         </label>
-        <select asp-for="SelectedBookId" asp-items="@(new SelectList(Model.ViewModel.Books,"ID","Title"))">
+        <select asp-for="SelectedBookId" asp-items="@(new SelectList(Model.Books,"ID","Title"))">
             <option value="">Choose a book</option>
         </select>
     </div>
     <div>
         <label>Select Genre:</label>
-        @foreach (var genre in Model.ViewModel.Genres)
+        @foreach (var genre in Model.Genres)
         {
             <div>
                 <input type="checkbox" name="SelectedGenreIds" value="@genre.ID" />
