@@ -9,7 +9,7 @@
             Select book:
         </label>
         <select asp-for="SelectedBookId" asp-items="@(new SelectList(Model.Books,"ID","Title"))">
-            <option value="">Choose a book</option>
+            <option value="">Select a book</option>
         </select>
     </div>
     <div>
