@@ -1,4 +1,3 @@
-using BookLogApp.ViewModels;
 using BookLogAppFactories;
 using BookLogAppInterfaces;
 using DomainModelsLayer;
