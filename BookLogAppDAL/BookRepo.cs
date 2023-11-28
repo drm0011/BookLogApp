@@ -188,6 +188,43 @@ namespace BookLogAppDAL
             }
         }
 
+        public List<GenreDTO> LoadGenresForBook(int id)
+        {
+            List<GenreDTO> genreList = new List<GenreDTO>();
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(GetConnString()))
+                {
+                    connection.Open();
+                    string sql = @"SELECT Genre.Id, Genre.Name FROM Genre
+                                   INNER JOIN Books_Genre ON Genre.Id=Books_Genre.GenreId
+                                   WHERE Books_Genre.BookId=@Id;";
+
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.Parameters.AddWithValue("@Id", id);
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                genreList.Add(new GenreDTO
+                                {
+                                    ID = Convert.ToInt32(reader["Id"]),
+                                    Name = reader["Name"].ToString()
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+
+                throw;
+            }
+            return genreList;
+        }
+
         #endregion
 
     }

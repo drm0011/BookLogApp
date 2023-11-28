@@ -47,14 +47,15 @@ namespace BookLogAppDAL
             public List<GenreDTO> GetGenres()
             {
                 List<GenreDTO> genreList = new List<GenreDTO>();
-                try
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(GetConnString()))
                 {
-                    using (SqlConnection connection = new SqlConnection(GetConnString()))
-                    {
-                        connection.Open();
-                        string sql = @"SELECT Id, Name FROM Genre;";
+                    connection.Open();
+                    string sql = @"SELECT Id, Name FROM Genre;";
 
-                        using (SqlCommand command = new SqlCommand(sql, connection))
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
                             while (reader.Read())
@@ -68,11 +69,12 @@ namespace BookLogAppDAL
                         }
                     }
                 }
-                catch (SqlException ex)
-                {
-                    // Log the exception details
-                    throw new ApplicationException("Error occurred while retrieving genres", ex);
-                }
+            }
+            catch (SqlException ex)
+            {
+                // Log the exception details
+                throw new ApplicationException("Error occurred while retrieving genres", ex);
+            }
 
                 return genreList;
             }
@@ -174,9 +176,34 @@ namespace BookLogAppDAL
                 }
             }
 
-            #endregion
+        public void CreateBooksGenreRelation(int bookId, int genreId)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(GetConnString()))
+                {
+                    connection.Open();
+                    string sql = @"INSERT INTO Books_Genre (BookId, GenreId) 
+                           VALUES (@BookId, @GenreId);";
 
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.Parameters.Add("@BookId", SqlDbType.Int).Value = bookId;
+                        command.Parameters.Add("@GenreId", SqlDbType.Int).Value = genreId;
+
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw new ApplicationException("Error occurred while creating record", ex);
+            }
         }
+
+        #endregion
+
+    }
     }
 
 

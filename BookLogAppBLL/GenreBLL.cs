@@ -55,5 +55,10 @@ namespace BookLogAppBLL
         {
             _genreRepo.UpdateGenre(genre.ID, genre.Name);   
         }
+
+        public void CreateBooksGenreRelation(int bookId, int genreId)
+        {
+            _genreRepo.CreateBooksGenreRelation(bookId, genreId);
+        }
     }
 }

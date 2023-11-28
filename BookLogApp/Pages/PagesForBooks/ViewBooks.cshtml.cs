@@ -19,7 +19,5 @@ namespace BookLogApp.Pages.PagesForBooks
         {
             Books = _bookBLL.GetBooks();
         }
-
-
     }
 }
