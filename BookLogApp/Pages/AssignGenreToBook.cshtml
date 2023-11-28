@@ -14,7 +14,7 @@
     </div>
     <div>
         <label>Select Genre:</label>
-        @foreach (var genre in Model.Genres)
+        @foreach (DomainModelsLayer.Genre genre in Model.Genres)
         {
             <div>
                 <input type="checkbox" name="SelectedGenreIds" value="@genre.ID" />
