@@ -1,3 +1,4 @@
+using BookLogApp.ViewModels;
 using BookLogAppFactories;
 using BookLogAppInterfaces;
 using DomainModelsLayer;
@@ -10,6 +11,7 @@ namespace BookLogApp.Pages.PagesForBooks
     {
         private readonly IBookBLL _bookBLL;
 
+        public BooksGenre ViewModel { get; set; }
         public ViewBooksModel()
         {
             _bookBLL = Factory.CreateBookBLL();
@@ -18,6 +20,11 @@ namespace BookLogApp.Pages.PagesForBooks
         public void OnGet()
         {
             Books = _bookBLL.GetBooks();
+            foreach(Book book in Books)
+            {
+                book.Genres = _bookBLL.LoadGenresForBook(book.ID);
+                
+            }
         }
     }
 }

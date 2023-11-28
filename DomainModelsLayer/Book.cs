@@ -13,6 +13,7 @@ namespace DomainModelsLayer
         public string Summary { get; set; }
         public string Author { get; set; }
         public string ISBN { get; set; }
+        public List<Genre> Genres { get; set; }
 
         //TODO: add update method, private setters <---------------
 

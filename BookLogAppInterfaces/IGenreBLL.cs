@@ -15,5 +15,6 @@ namespace BookLogAppInterfaces
         void UpdateGenre(Genre genre);
         Genre GetGenreById(int id);
         void DeleteGenre(int id);
+        void CreateBooksGenreRelation(int bookId, int genreId);
     }
 }

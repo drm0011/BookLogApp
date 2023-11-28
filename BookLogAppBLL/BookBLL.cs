@@ -85,6 +85,17 @@ namespace BookLogAppBLL
             }
         }
 
+        public List<Genre> LoadGenresForBook(int id)
+        {
+            List<GenreDTO> genreDTOs = _bookRepo.LoadGenresForBook(id);
+            List<Genre> genres=new List<Genre>();
+
+            foreach(GenreDTO genreDTO in genreDTOs)
+            {
+                genres.Add(Mapper.ToDomainModel(genreDTO));
+            }
+            return genres;
+        }
         #endregion
     }
 }
