@@ -1,6 +1,8 @@
 ﻿using DTOs;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,5 +17,7 @@ namespace BookLogAppInterfaces
         GenreDTO GetGenreById(int id);
         void DeleteGenre(int id);
         void CreateBooksGenreRelation(int bookId, int genreId);
+        void DeleteBooksGenreRelationByBookId(int bookId);
+
     }
 }

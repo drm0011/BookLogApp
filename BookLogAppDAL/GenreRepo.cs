@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BookLogAppDAL
 {
-    public class GenreRepo:IGenreRepo
+    public class GenreRepo : IGenreRepo
     {
         private string GetConnString(string connName = @"Server=(localdb)\mssqllocaldb;Database=BookLogApp;Trusted_Connection=True;")
         {
@@ -18,35 +18,35 @@ namespace BookLogAppDAL
         }
 
         #region genre data functions
-            public void CreateGenre(string name)
+        public void CreateGenre(string name)
+        {
+            try
             {
-                try
+                using (SqlConnection connection = new SqlConnection(GetConnString()))
                 {
-                    using (SqlConnection connection = new SqlConnection(GetConnString()))
-                    {
-                        connection.Open();
-                        string sql = @"INSERT INTO Genre (Name) 
+                    connection.Open();
+                    string sql = @"INSERT INTO Genre (Name) 
                            VALUES (@Name);";
 
-                        using (SqlCommand command = new SqlCommand(sql, connection))
-                        {
-                            command.Parameters.Add("@Name", SqlDbType.VarChar).Value = name;
-                            
-                            command.ExecuteNonQuery();
-                        }
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.Parameters.Add("@Name", SqlDbType.VarChar).Value = name;
+
+                        command.ExecuteNonQuery();
                     }
                 }
-                catch (SqlException ex)
-                {
-                    // Log the exception and rethrow a custom exception or handle it as needed
-                    throw new ApplicationException("Error occurred while creating the genre", ex);
-                }
             }
-
-
-            public List<GenreDTO> GetGenres()
+            catch (SqlException ex)
             {
-                List<GenreDTO> genreList = new List<GenreDTO>();
+                // Log the exception and rethrow a custom exception or handle it as needed
+                throw new ApplicationException("Error occurred while creating the genre", ex);
+            }
+        }
+
+
+        public List<GenreDTO> GetGenres()
+        {
+            List<GenreDTO> genreList = new List<GenreDTO>();
             try
             {
                 using (SqlConnection connection = new SqlConnection(GetConnString()))
@@ -76,105 +76,105 @@ namespace BookLogAppDAL
                 throw new ApplicationException("Error occurred while retrieving genres", ex);
             }
 
-                return genreList;
-            }
+            return genreList;
+        }
 
 
-            public void UpdateGenre(int id, string name)
+        public void UpdateGenre(int id, string name)
+        {
+            try
             {
-                try
+                using (SqlConnection connection = new SqlConnection(GetConnString()))
                 {
-                    using (SqlConnection connection = new SqlConnection(GetConnString()))
-                    {
-                        connection.Open();
-                        string sql = @"UPDATE Genre
+                    connection.Open();
+                    string sql = @"UPDATE Genre
                            SET Name=@Name
                            WHERE Id=@Id";
 
-                        using (SqlCommand command = new SqlCommand(sql, connection))
-                        {
-                            command.Parameters.Add("@Name", SqlDbType.VarChar).Value = name;
-                            command.Parameters.Add("@Id", SqlDbType.Int).Value = id;
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.Parameters.Add("@Name", SqlDbType.VarChar).Value = name;
+                        command.Parameters.Add("@Id", SqlDbType.Int).Value = id;
 
-                            int affectedRows = command.ExecuteNonQuery();
-                            if (affectedRows == 0)
-                            {
-                                //log and handle the situation when no rows are affected
-                            }
+                        int affectedRows = command.ExecuteNonQuery();
+                        if (affectedRows == 0)
+                        {
+                            //log and handle the situation when no rows are affected
                         }
                     }
-                }
-                catch (SqlException ex)
-                {
-                    // Log the exception details
-                    throw new ApplicationException("Error occurred in updating the genre", ex);
                 }
             }
-
-
-            public GenreDTO GetGenreById(int id)
+            catch (SqlException ex)
             {
-                GenreDTO genreDTO = null;
-                try
+                // Log the exception details
+                throw new ApplicationException("Error occurred in updating the genre", ex);
+            }
+        }
+
+
+        public GenreDTO GetGenreById(int id)
+        {
+            GenreDTO genreDTO = null;
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(GetConnString()))
                 {
-                    using (SqlConnection connection = new SqlConnection(GetConnString()))
+                    connection.Open();
+                    string sql = @"SELECT Id, Name FROM Genre WHERE Id = @Id";
+
+                    using (SqlCommand command = new SqlCommand(sql, connection))
                     {
-                        connection.Open();
-                        string sql = @"SELECT Id, Name FROM Genre WHERE Id = @Id";
+                        command.Parameters.Add("@Id", SqlDbType.Int).Value = id;
 
-                        using (SqlCommand command = new SqlCommand(sql, connection))
+                        using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            command.Parameters.Add("@Id", SqlDbType.Int).Value = id;
-
-                            using (SqlDataReader reader = command.ExecuteReader())
+                            if (reader.Read())
                             {
-                                if (reader.Read()) 
+                                genreDTO = new GenreDTO
                                 {
-                                    genreDTO = new GenreDTO
-                                    {
-                                        ID = Convert.ToInt32(reader["Id"]),
-                                        Name = reader["Name"].ToString()
-                                    };
-                                }
+                                    ID = Convert.ToInt32(reader["Id"]),
+                                    Name = reader["Name"].ToString()
+                                };
                             }
                         }
                     }
                 }
-                catch (SqlException ex)
-                {
-                    // Log the exception details
-                    throw new ApplicationException("Error occurred in retrieving the genre", ex);
-                }
+            }
+            catch (SqlException ex)
+            {
+                // Log the exception details
+                throw new ApplicationException("Error occurred in retrieving the genre", ex);
+            }
 
             return genreDTO;
-            }
+        }
 
-            public void DeleteGenre(int id)
+        public void DeleteGenre(int id)
+        {
+            try
             {
-                try
+                using (SqlConnection connection = new SqlConnection(GetConnString()))
                 {
-                    using (SqlConnection connection = new SqlConnection(GetConnString()))
+                    connection.Open();
+                    string sql = @"DELETE FROM Genre WHERE Id=@Id";
+
+                    using (SqlCommand command = new SqlCommand(sql, connection))
                     {
-                        connection.Open();
-                        string sql = @"DELETE FROM Genre WHERE Id=@Id";
+                        command.Parameters.Add("@Id", SqlDbType.Int).Value = id;
 
-                        using (SqlCommand command = new SqlCommand(sql, connection))
+                        int affectedRows = command.ExecuteNonQuery();
+                        if (affectedRows == 0)
                         {
-                            command.Parameters.Add("@Id", SqlDbType.Int).Value = id;
-
-                            int affectedRows = command.ExecuteNonQuery();
-                            if (affectedRows == 0)
-                            {
-                                // Log and handle the situation when no rows are affected
-                            }
+                            // Log and handle the situation when no rows are affected
                         }
                     }
                 }
-                catch (SqlException ex)
-                {
-                    throw new ApplicationException("Error occurred in deleting the Genre", ex);
-                }
             }
+            catch (SqlException ex)
+            {
+                throw new ApplicationException("Error occurred in deleting the Genre", ex);
+            }
+        }
 
         public void CreateBooksGenreRelation(int bookId, int genreId)
         {
@@ -201,10 +201,33 @@ namespace BookLogAppDAL
             }
         }
 
+        public void DeleteBooksGenreRelationByBookId(int bookId)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(GetConnString()))
+                {
+                    connection.Open();
+                    string sql = @"DELETE FROM Books_Genre WHERE BookId = @BookId;";
+
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.Parameters.Add("@BookId", SqlDbType.Int).Value = bookId;
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw new ApplicationException("Error occurred while deleting book-genre relations", ex);
+            }
+        }
+
+
         #endregion
 
     }
-    }
+}
 
 
 

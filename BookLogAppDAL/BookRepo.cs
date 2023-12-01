@@ -181,12 +181,7 @@ namespace BookLogAppDAL
                         using (SqlCommand command = new SqlCommand(sqlDeleteBook, connection, transaction))
                         {
                             command.Parameters.Add("@Id", SqlDbType.Int).Value = id;
-                            int affectedRows = command.ExecuteNonQuery();
-                            if (affectedRows == 0)
-                            {
-                                // Log and handle the situation when no rows are affected
-                                // This means no book was found with the given ID
-                            }
+                            command.ExecuteNonQuery();
                         }
 
                         transaction.Commit();

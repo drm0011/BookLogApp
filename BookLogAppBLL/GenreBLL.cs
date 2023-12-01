@@ -61,5 +61,9 @@ namespace BookLogAppBLL
             _genreRepo.CreateBooksGenreRelation(bookId, genreId);
         }
 
+        public void DeleteBooksGenreRelationByBookId(int bookId)
+        {
+            _genreRepo.DeleteBooksGenreRelationByBookId(bookId);
+        }
     }
 }
