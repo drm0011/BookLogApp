@@ -1,0 +1,26 @@
+﻿@page
+@model BookLogApp.Pages.AssignGenreToBookModel
+
+<h2>Assign genre to book</h2>
+
+<form method="post">
+    <div>
+        <label>
+            Select book:
+        </label>
+        <select asp-for="SelectedBookId" asp-items="@(new SelectList(Model.Books,"ID","Title"))">
+            <option value="">Select a book</option>
+        </select>
+    </div>
+    <div>
+        <label>Select Genre:</label>
+        @foreach (DomainModelsLayer.Genre genre in Model.Genres)
+        {
+            <div>
+                <input type="checkbox" name="SelectedGenreIds" value="@genre.ID" />
+                <label>@genre.Name</label>
+            </div>
+        }
+    </div>
+    <button type="submit">Assign Genre</button>
+</form>

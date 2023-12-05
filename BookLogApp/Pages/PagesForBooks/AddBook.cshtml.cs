@@ -2,11 +2,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
-using BookLogAppBLL;  
-using BookLogAppFactories; 
+using BookLogAppBLL;
+using BookLogAppFactories;
 using BookLogAppInterfaces;
 
-namespace BookLogApp.Pages
+namespace BookLogApp.Pages.PagesForBooks
 {
     public class AddBookModel : PageModel
     {
@@ -14,7 +14,7 @@ namespace BookLogApp.Pages
 
         public AddBookModel()
         {
-            _bookBLL = BookFactory.CreateBookBLL();
+            _bookBLL = Factory.CreateBookBLL();
         }
 
         [BindProperty]
@@ -40,7 +40,7 @@ namespace BookLogApp.Pages
                 return Page();
             }
 
-            
+
 
             try
             {

@@ -1,5 +1,5 @@
 ﻿@page "{id:int}"
-@model BookLogApp.Pages.UpdateBookModel
+@model BookLogApp.Pages.PagesForBooks.UpdateBookModel //TODO: update the genres for book/delete a genre for a book
 
 <h2>Update @Model.Book.Title</h2>
 
@@ -20,6 +20,17 @@
     <div>
         <label for="Summary">Summary:</label>
         <textarea id="Summary" asp-for="Book.Summary"></textarea>
+    </div>
+    <div>
+        <label>Select Genre:</label>
+        @foreach (DomainModelsLayer.Genre genre in Model.AllGenres)
+        {
+            <div>
+                <input type="checkbox" name="SelectedGenreIds" value="@genre.ID"
+                @(Model.SelectedGenreIds.Contains(genre.ID) ? "checked" : "") />
+                <label>@genre.Name</label>
+            </div>
+        }
     </div>
 
     <button type="submit">Update @Model.Book.Title</button>

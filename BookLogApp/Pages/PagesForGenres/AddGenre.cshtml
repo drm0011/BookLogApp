@@ -1,0 +1,17 @@
+﻿@page
+@model BookLogApp.Pages.PagesForGenres.AddGenreModel
+@{
+    <h2>Add Genre</h2>
+
+    <form method="post">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div>
+            <label for="Name">Name:</label>
+            <input id="Name" name="Name" asp-for="Name" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+
+        <button type="submit">Add Genre</button>
+    </form>
+}

@@ -167,18 +167,24 @@ namespace BookLogAppDAL
                 using (SqlConnection connection = new SqlConnection(GetConnString()))
                 {
                     connection.Open();
-                    string sql = @"DELETE FROM Books WHERE Id=@Id";
 
-                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    using (SqlTransaction transaction = connection.BeginTransaction())
                     {
-                        command.Parameters.Add("@Id", SqlDbType.Int).Value = id;
-
-                        int affectedRows = command.ExecuteNonQuery();
-                        if (affectedRows == 0)
+                        string sqlDeleteRelations = @"DELETE FROM Books_Genre WHERE BookId=@Id";
+                        using (SqlCommand command = new SqlCommand(sqlDeleteRelations, connection, transaction))
                         {
-                            // Log and handle the situation when no rows are affected
-                            // This means no book was found with the given ID
+                            command.Parameters.Add("@Id", SqlDbType.Int).Value = id;
+                            command.ExecuteNonQuery();
                         }
+
+                        string sqlDeleteBook = @"DELETE FROM Books WHERE Id=@Id";
+                        using (SqlCommand command = new SqlCommand(sqlDeleteBook, connection, transaction))
+                        {
+                            command.Parameters.Add("@Id", SqlDbType.Int).Value = id;
+                            command.ExecuteNonQuery();
+                        }
+
+                        transaction.Commit();
                     }
                 }
             }
@@ -186,6 +192,43 @@ namespace BookLogAppDAL
             {
                 throw new ApplicationException("Error occurred in deleting the book", ex);
             }
+        }
+
+        public List<GenreDTO> LoadGenresForBook(int id)
+        {
+            List<GenreDTO> genreList = new List<GenreDTO>();
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(GetConnString()))
+                {
+                    connection.Open();
+                    string sql = @"SELECT Genre.Id, Genre.Name FROM Genre
+                                   INNER JOIN Books_Genre ON Genre.Id=Books_Genre.GenreId
+                                   WHERE Books_Genre.BookId=@Id;";
+
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.Parameters.AddWithValue("@Id", id);
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                genreList.Add(new GenreDTO
+                                {
+                                    ID = Convert.ToInt32(reader["Id"]),
+                                    Name = reader["Name"].ToString()
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+
+                throw;
+            }
+            return genreList;
         }
 
         #endregion

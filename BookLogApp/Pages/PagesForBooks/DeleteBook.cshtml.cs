@@ -4,7 +4,7 @@ using DomainModelsLayer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace BookLogApp.Pages
+namespace BookLogApp.Pages.PagesForBooks
 {
     public class DeleteBookModel : PageModel
     {
@@ -13,7 +13,7 @@ namespace BookLogApp.Pages
 
         public DeleteBookModel()
         {
-            _bookBLL=BookFactory.CreateBookBLL();
+            _bookBLL = Factory.CreateBookBLL();
         }
         public Book Book { get; set; }
         public IActionResult OnGet(int id)
