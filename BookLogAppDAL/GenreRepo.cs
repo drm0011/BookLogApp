@@ -156,18 +156,27 @@ namespace BookLogAppDAL
                 using (SqlConnection connection = new SqlConnection(GetConnString()))
                 {
                     connection.Open();
-                    string sql = @"DELETE FROM Genre WHERE Id=@Id";
 
-                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    using(SqlTransaction transaction = connection.BeginTransaction()) 
                     {
-                        command.Parameters.Add("@Id", SqlDbType.Int).Value = id;
-
-                        int affectedRows = command.ExecuteNonQuery();
-                        if (affectedRows == 0)
+                        string sqlDeleteRelations = @"DELETE FROM Books_Genre WHERE GenreId=@Id";
+                        using (SqlCommand command = new SqlCommand(sqlDeleteRelations, connection, transaction))
                         {
-                            // Log and handle the situation when no rows are affected
+                            command.Parameters.Add("@Id", SqlDbType.Int).Value = id;
+                            command.ExecuteNonQuery();
                         }
+
+                        string sqlDeleteGenre = @"DELETE FROM Genre WHERE Id=@Id";
+
+                        using (SqlCommand command = new SqlCommand(sqlDeleteGenre, connection, transaction))
+                        {
+                            command.Parameters.Add("@Id", SqlDbType.Int).Value = id;
+                            command.ExecuteNonQuery();
+                        }
+
+                        transaction.Commit();
                     }
+
                 }
             }
             catch (SqlException ex)

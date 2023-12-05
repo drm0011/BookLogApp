@@ -1,25 +1,30 @@
 ﻿@page
 @model ViewBooksModel
-<h2>Book List</h2>
 
-<ul>
-    @foreach (DomainModelsLayer.Book book in Model.Books)
-    {
-        <li>
-            <a href="./UpdateBook/@book.ID"><strong>Title:</strong> @book.Title <br /></a>
-            <strong>Author:</strong> @book.Author <br />
-            <strong>Summary:</strong> @book.Summary <br />
-            <strong>ISBN:</strong> @book.ISBN <br/>
-            <strong>Genre: </strong>
-            @for(int i=0; i < book.Genres.Count; i++)
-            {
-                @book.Genres[i].Name
-                if(i<book.Genres.Count-1){
-                    @:|
-                }
-            }
-            <br/>
-            <a href="./DeleteBook/@book.ID">Delete @book.Title</a>
-        </li>
-    }
-</ul>
+<div class="container mt-5">
+    <h2 class="mb-4">Book List</h2>
+
+    <ul class="list-unstyled">
+        @foreach (DomainModelsLayer.Book book in Model.Books)
+        {
+            <li class="mb-3 pb-3 border-bottom">
+                <h3><a href="./UpdateBook/@book.ID" class="text-decoration-none">@book.Title</a></h3>
+                <p><strong>Author:</strong> @book.Author</p>
+                <p><strong>Summary:</strong> @book.Summary</p>
+                <p><strong>ISBN:</strong> @book.ISBN</p>
+                <p>
+                    <strong>Genre: </strong>
+                    @for (int i = 0; i < book.Genres.Count; i++)
+                    {
+                        @book.Genres[i].Name
+                        if (i < book.Genres.Count - 1)
+                        {
+                            @:|
+                        }
+                    }
+                </p>
+                <a href="./DeleteBook/@book.ID" class="btn btn-danger">Delete @book.Title</a>
+            </li>
+        }
+    </ul>
+</div>
