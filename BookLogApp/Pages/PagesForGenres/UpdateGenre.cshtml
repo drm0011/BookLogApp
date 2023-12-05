@@ -1,16 +1,17 @@
 ﻿@page "{id:int}"
 @model BookLogApp.Pages.PagesForGenres.UpdateGenreModel
 
-<h2>Update @Model.Genre.Name</h2>
+<div class="container mt-4">
+    <h2 class="mb-3">Update @Model.Genre.Name</h2>
 
-<form method="post">
-    <input type="hidden" asp-for="Genre.ID" />
+    <form method="post" class="needs-validation" novalidate>
+        <input type="hidden" asp-for="Genre.ID" />
 
-    <div>
-        <label for="Name">Name:</label>
-        <input id="Name" asp-for="Genre.Name" />
-    </div>
+        <div class="mb-3">
+            <label for="Name" class="form-label">Name:</label>
+            <input id="Name" asp-for="Genre.Name" class="form-control" />
+        </div>
 
-    <button type="submit">Update @Model.Genre.Name</button>
-</form>
-
+        <button type="submit" class="btn btn-primary">Update @Model.Genre.Name</button>
+    </form>
+</div>

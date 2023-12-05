@@ -1,35 +1,36 @@
 ﻿@page
 @model BookLogApp.Pages.PagesForBooks.AddBookModel
-@{
-    <h2>Add Book</h2>
 
-    <form method="post">
-        <div asp-validation-summary="All" class="text-danger"></div>
-        <div>
-            <label for="Title">Title:</label>
-            <input id="Title" name="Title" asp-for="Title" />
+<div class="container mt-4">
+    <h2 class="mb-3">Add Book</h2>
+
+    <form method="post" class="needs-validation" novalidate>
+        <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+        <div class="mb-3">
+            <label for="Title" class="form-label">Title:</label>
+            <input id="Title" name="Title" asp-for="Title" class="form-control" />
             <span asp-validation-for="Title" class="text-danger"></span>
         </div>
 
-        <div>
-            <label for="Author">Author:</label>
-            <input id="Author" name="Author" asp-for="Author" />
+        <div class="mb-3">
+            <label for="Author" class="form-label">Author:</label>
+            <input id="Author" name="Author" asp-for="Author" class="form-control" />
             <span asp-validation-for="Author" class="text-danger"></span>
         </div>
 
-        <div>
-            <label for="Summary">Summary:</label>
-            <textarea id="Summary" name="Summary" asp-for="Summary"></textarea>
+        <div class="mb-3">
+            <label for="Summary" class="form-label">Summary:</label>
+            <textarea id="Summary" name="Summary" asp-for="Summary" class="form-control"></textarea>
             <span asp-validation-for="Summary" class="text-danger"></span>
         </div>
 
-        <div>
-            <label for="ISBN">ISBN:</label>
-            <input id="ISBN" name="ISBN" asp-for="ISBN" />
+        <div class="mb-3">
+            <label for="ISBN" class="form-label">ISBN:</label>
+            <input id="ISBN" name="ISBN" asp-for="ISBN" class="form-control" />
             <span asp-validation-for="ISBN" class="text-danger"></span>
         </div>
 
-
-        <button type="submit">Add Book</button>
+        <button type="submit" class="btn btn-primary">Add Book</button>
     </form>
-}
+</div>
