@@ -6,7 +6,7 @@
     @if (!ModelState.IsValid)
     {
         <div class="alert alert-danger">
-            @foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+            @foreach (Microsoft.AspNetCore.Mvc.ModelBinding.ModelError error in ModelState.Values.SelectMany(v => v.Errors))
             {
                 <p>@error.ErrorMessage</p>
             }
