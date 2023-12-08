@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookLogAppFactories", "Book
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainModelsLayer", "DomainModelsLayer\DomainModelsLayer.csproj", "{C0CB3801-BD15-4544-825F-4E3E51146791}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookLogApp.Tests", "BookLogApp.Tests\BookLogApp.Tests.csproj", "{DA7CE0B6-6AEB-4CE0-88F1-AED9634C0977}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{C0CB3801-BD15-4544-825F-4E3E51146791}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0CB3801-BD15-4544-825F-4E3E51146791}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0CB3801-BD15-4544-825F-4E3E51146791}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA7CE0B6-6AEB-4CE0-88F1-AED9634C0977}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA7CE0B6-6AEB-4CE0-88F1-AED9634C0977}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA7CE0B6-6AEB-4CE0-88F1-AED9634C0977}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA7CE0B6-6AEB-4CE0-88F1-AED9634C0977}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
