@@ -3,7 +3,15 @@
 
 <div class="container mt-4">
     <h2 class="mb-3">Assign genre to book</h2>
-
+    @if (!ModelState.IsValid)
+    {
+        <div class="alert alert-danger">
+            @foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <p>@error.ErrorMessage</p>
+            }
+        </div>
+    }
     <form method="post" class="needs-validation" novalidate>
         <div class="mb-3">
             <label class="form-label">Select book:</label>

@@ -31,15 +31,31 @@ namespace BookLogApp.Pages
 
         public IActionResult OnPost()
         {
-            if(SelectedBookId > 0 && SelectedGenreIds.Count > 0)
+            try
             {
-                foreach(int genreId in SelectedGenreIds)
+                if (SelectedBookId > 0 && SelectedGenreIds.Count > 0)
                 {
-                    _genreBLL.CreateBooksGenreRelation(SelectedBookId, genreId);
+                    foreach (int genreId in SelectedGenreIds)
+                    {
+                        _genreBLL.CreateBooksGenreRelation(SelectedBookId, genreId);
+                    }
+                    return RedirectToPage("/PagesForBooks/ViewBooks");
                 }
+
+            }
+            catch (Exception)
+            {
+                Books = _bookBLL.GetBooks();
+                Genres = _genreBLL.GetGenres();
+
+                ModelState.AddModelError(string.Empty, "An error occured assigning genres to your book");
+                return Page();
             }
 
-            return RedirectToPage("/PagesForBooks/ViewBooks");
+            Books = _bookBLL.GetBooks();
+            Genres = _genreBLL.GetGenres();
+
+            return Page();
         }
     }
 }
