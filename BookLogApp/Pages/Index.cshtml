@@ -1,10 +1,35 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container mt-5">
+
+    <div class="text-center">
+        <h1 class="display-4">Welcome to BookLogApp</h1>
+        <p class="lead">Your personal log to track your book reading progress</p>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <h3>Manage Your Books</h3>
+            <p>Keep track of all your books, authors, and summaries in one place.</p>
+        </div>
+        <div class="col-md-4">
+            <h3>Organize by Genre</h3>
+            <p>Categorize books into genres for easy retrieval and organization.</p>
+        </div>
+        <div class="col-md-4">
+            <h3>Easy Access</h3>
+            <p>Access your book collection from anywhere.</p>
+        </div>
+    </div>
+
+    <div class="text-center mt-5">
+        <a href="/PagesForBooks/ViewBooks" class="btn btn-primary">View Books</a>
+        <a href="/PagesForGenres/ViewGenres" class="btn btn-secondary">View Genres</a>
+    </div>
+
+
 </div>
