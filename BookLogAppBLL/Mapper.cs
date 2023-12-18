@@ -43,5 +43,21 @@ namespace BookLogAppBLL
                 Name = domainModel.Name,
             };
         }
+
+        public static Journal ToDomainModel(JournalDTO dto)
+        {
+            Journal journal = new Journal(dto.ID, dto.Entry, dto.BookID);
+            return journal;
+        }
+
+        public static JournalDTO ToDTO(JournalDTO domainModel)
+        {
+            return new JournalDTO
+            {
+                ID = domainModel.ID,
+                Entry = domainModel.Entry,
+                BookID = domainModel.BookID,
+            };
+        }
     }
 }

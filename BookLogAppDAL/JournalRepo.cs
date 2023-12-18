@@ -6,10 +6,12 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Security.Cryptography.X509Certificates;
+using BookLogAppInterfaces;
 
 namespace BookLogAppDAL
 {
-    public class JournalRepo
+    public class JournalRepo:IJournalRepo
     {
         private string GetConnString(string connName = @"Server=(localdb)\mssqllocaldb;Database=BookLogApp;Trusted_Connection=True;")
         {
@@ -52,6 +54,31 @@ namespace BookLogAppDAL
             }
 
             return journalDTO; 
+        }
+
+        public void CreateJournalEntry(string entry, int bookId)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(GetConnString()))
+                {
+                    connection.Open();
+                    string sql = @"INSERT INTO JournalEntries (Entry, BookId) 
+                           VALUES (@Entry, @BookId);";
+
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.Parameters.Add("@Title", SqlDbType.VarChar).Value = entry;
+                        command.Parameters.Add("@Author", SqlDbType.Int).Value = bookId;
+
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw new ApplicationException("Error occurred while creating entry", ex);
+            }
         }
     }
 }
