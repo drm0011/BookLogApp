@@ -167,7 +167,7 @@ namespace BookLogAppDAL
                 using (SqlConnection connection = new SqlConnection(GetConnString()))
                 {
                     connection.Open();
-
+                    //documenteren
                     using (SqlTransaction transaction = connection.BeginTransaction())
                     {
                         string sqlDeleteRelations = @"DELETE FROM Books_Genre WHERE BookId=@Id";

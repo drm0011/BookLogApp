@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="BookRepo.cs" />
     <Compile Include="GenreRepo.cs" />
+    <Compile Include="JournalRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
