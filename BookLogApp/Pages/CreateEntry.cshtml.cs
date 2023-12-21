@@ -24,7 +24,7 @@ namespace BookLogApp.Pages
             Book = _bookBLL.GetBookById(id);
             if (Book != null)
             {
-                //TODO: simplify code
+                //TODO: simplify code, and error handling
                 int journalId = _journalBLL.GetJournalEntryIdForBook(id);
 
                 Journal journalEntry = _journalBLL.GetEntryAndBookById(journalId, id);
