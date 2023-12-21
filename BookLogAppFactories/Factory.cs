@@ -20,5 +20,10 @@ namespace BookLogAppFactories
         {
             return new GenreBLL(new GenreRepo());
         }
+
+        public static IJournalBLL CreateJournalBLL()
+        {
+            return new JournalBLL(new JournalRepo());
+        }
     }
 }

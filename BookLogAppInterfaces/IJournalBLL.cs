@@ -11,6 +11,7 @@ namespace BookLogAppInterfaces
     public interface IJournalBLL
     {
         Journal GetEntryAndBookById(int id, int bookId);
-        void CreateJournalEntry(string entry, int bookId);
+        void UpsertJournalEntry(string entry, int bookId);
+        int GetJournalEntryIdForBook(int bookId);
     }
 }

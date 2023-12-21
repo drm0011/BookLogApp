@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookLogAppFactories", "Book
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainModelsLayer", "DomainModelsLayer\DomainModelsLayer.csproj", "{C0CB3801-BD15-4544-825F-4E3E51146791}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookLogApp.Tests", "BookLogApp.Tests\BookLogApp.Tests.csproj", "{DA7CE0B6-6AEB-4CE0-88F1-AED9634C0977}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookLogApp.Tests", "BookLogApp.Tests\BookLogApp.Tests.csproj", "{DA7CE0B6-6AEB-4CE0-88F1-AED9634C0977}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

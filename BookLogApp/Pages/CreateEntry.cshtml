@@ -1,0 +1,17 @@
+﻿@page "{id:int}"
+@model BookLogApp.Pages.CreateEntryModel
+
+<div class="container mt-5">
+    <h2 class="mb-4">Journal Entry for @Model.Book.Title</h2>
+
+    <form method="post">
+        <input type="hidden" asp-for="Book.ID" />
+        <div class="form-group">
+            <label asp-for="JournalEntry">Write an entry</label>
+            <textarea asp-for="JournalEntry" class="form-control" rows="10"></textarea>
+            <span asp-validation-for="JournalEntry" class="text-danger"></span>
+        </div>
+        <br/>
+        <button type="submit" class="btn btn-success">Submit Entry</button>
+    </form>
+</div>

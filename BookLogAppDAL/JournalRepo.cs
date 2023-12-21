@@ -55,21 +55,51 @@ namespace BookLogAppDAL
 
             return journalDTO; 
         }
-
-        public void CreateJournalEntry(string entry, int bookId)
+        public int GetJournalEntryIdForBook(int bookId)
         {
             try
             {
                 using (SqlConnection connection = new SqlConnection(GetConnString()))
                 {
                     connection.Open();
-                    string sql = @"INSERT INTO JournalEntries (Entry, BookId) 
-                           VALUES (@Entry, @BookId);";
+                    string sql = @"SELECT TOP 1 Id FROM JournalEntries WHERE BookId = @BookId ORDER BY Id DESC";
 
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
-                        command.Parameters.Add("@Title", SqlDbType.VarChar).Value = entry;
-                        command.Parameters.Add("@Author", SqlDbType.Int).Value = bookId;
+                        command.Parameters.Add("@BookId", SqlDbType.Int).Value = bookId;
+
+                        object result = command.ExecuteScalar();
+                        if (result != null)
+                        {
+                            return Convert.ToInt32(result);
+                        }
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw new ApplicationException("Error occurred in retrieving the entry ID", ex);
+            }
+
+            return 0; 
+        }
+        public void UpsertJournalEntry(string entry, int bookId)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(GetConnString()))
+                {
+                    connection.Open();
+                    string sql = @"
+                IF EXISTS (SELECT 1 FROM JournalEntries WHERE BookId = @BookId)
+                    UPDATE JournalEntries SET Entry = @Entry WHERE BookId = @BookId;
+                ELSE
+                    INSERT INTO JournalEntries (Entry, BookId) VALUES (@Entry, @BookId);";
+
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.Parameters.Add("@Entry", SqlDbType.VarChar).Value = entry;
+                        command.Parameters.Add("@BookId", SqlDbType.Int).Value = bookId;
 
                         command.ExecuteNonQuery();
                     }
@@ -77,8 +107,9 @@ namespace BookLogAppDAL
             }
             catch (SqlException ex)
             {
-                throw new ApplicationException("Error occurred while creating entry", ex);
+                throw new ApplicationException("Error occurred while updating or creating entry", ex);
             }
         }
+
     }
 }

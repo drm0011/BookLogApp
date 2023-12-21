@@ -25,16 +25,21 @@ namespace BookLogAppBLL
 
             return null;
         }
-        public void CreateJournalEntry(string entry, int bookId)
+        public void UpsertJournalEntry(string entry, int bookId)
         {
             try
             {
-                _journalRepo.CreateJournalEntry(entry, bookId);
+                _journalRepo.UpsertJournalEntry(entry, bookId);
             }
             catch (Exception)
             {
                 throw;
             }
+        }
+
+        public int GetJournalEntryIdForBook(int bookId)
+        {
+            return _journalRepo.GetJournalEntryIdForBook(bookId);
         }
     }
 }
