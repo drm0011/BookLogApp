@@ -25,6 +25,7 @@ namespace BookLogAppBLL
         public string AnalyzeMood(string journalEntry)
         {
             Dictionary<string, int> moodScores = new Dictionary<string, int>();
+            bool isAnyMoodScored = false;
 
             foreach (string mood in _moodKeywords.Keys)
             {
@@ -34,10 +35,15 @@ namespace BookLogAppBLL
                     if (journalEntry.IndexOf(word, StringComparison.OrdinalIgnoreCase)>=0)
                     {
                         moodScores[mood] += score;
+                        isAnyMoodScored = true;
                     }
                 }
             }
 
+            if (!isAnyMoodScored)
+            {
+                return "Undefined mood"; 
+            }
             string predominantMood = moodScores.OrderByDescending(kv => kv.Value).First().Key;
             return predominantMood;
         }

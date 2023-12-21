@@ -13,5 +13,6 @@ namespace BookLogAppInterfaces
         Journal GetEntryAndBookById(int id, int bookId);
         void UpsertJournalEntry(string entry, int bookId);
         int GetJournalEntryIdForBook(int bookId);
+        string AnalyzeMood(string journalEntry);
     }
 }

@@ -13,5 +13,12 @@
         </div>
         <br/>
         <button type="submit" class="btn btn-success">Submit Entry</button>
+        <button type="submit" asp-page-handler="Analyze" class="btn btn-info">Analyze Mood</button>
     </form>
+
+    <br/>
+    @if (!string.IsNullOrEmpty(Model.AnalyzedMood))
+    {
+        <div class="alert alert-info">@Model.AnalyzedMood</div>
+    }
 </div>
