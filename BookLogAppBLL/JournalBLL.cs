@@ -20,6 +20,7 @@ namespace BookLogAppBLL
             {
                 { "Happy", new List<(string word, int score)> { ("joy", 1), ("happy", 1), ("delighted", 2) } },
                 { "Sad", new List<(string word, int score)> { ("sad", 1), ("depressed", 2), ("unhappy", 1) } },
+                { "Interesting", new List<(string word, int score)> {("interesting", 1), ("stimulating", 1)} },
             };
         }
         public string AnalyzeMood(string journalEntry)
@@ -44,6 +45,7 @@ namespace BookLogAppBLL
             {
                 return "Undefined mood"; 
             }
+
             string predominantMood = moodScores.OrderByDescending(kv => kv.Value).First().Key;
             return predominantMood;
         }
