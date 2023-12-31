@@ -8,8 +8,19 @@ namespace DomainModelsLayer
 {
     public class Book
     {
+        //update c#, validate in setter
+        private string title;
+
         public int ID { get; set; }
-        public string Title { get; set; }
+        public string Title
+        {
+            get => title; 
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value)) title = "loser";
+                title = value;
+            }
+        }
         public string Summary { get; set; }
         public string Author { get; set; }
         public string ISBN { get; set; }
