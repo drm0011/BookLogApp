@@ -49,9 +49,9 @@ namespace BookLogAppBLL
             string predominantMood = moodScores.OrderByDescending(kv => kv.Value).First().Key;
             return predominantMood;
         }
-        public Journal GetEntryAndBookById(int id, int bookId)
+        public Journal GetJournalEntryForBook(int bookId)
         {
-            JournalDTO journalDTO = _journalRepo.GetEntryAndBookById(id, bookId);
+            JournalDTO journalDTO = _journalRepo.GetJournalEntryForBook(bookId);
             if(journalDTO!=null)
             {
                 return Mapper.ToDomainModel(journalDTO);
@@ -71,9 +71,5 @@ namespace BookLogAppBLL
             }
         }
 
-        public int GetJournalEntryIdForBook(int bookId)
-        {
-            return _journalRepo.GetJournalEntryIdForBook(bookId);
-        }
     }
 }

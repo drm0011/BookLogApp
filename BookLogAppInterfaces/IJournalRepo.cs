@@ -9,8 +9,7 @@ namespace BookLogAppInterfaces
 {
     public interface IJournalRepo
     {
-        JournalDTO GetEntryAndBookById(int id, int bookId);
+        JournalDTO GetJournalEntryForBook(int bookId);
         void UpsertJournalEntry(string entry, int bookId);
-        int GetJournalEntryIdForBook(int bookId);
     }
 }

@@ -3,6 +3,7 @@ using BookLogAppInterfaces;
 using DomainModelsLayer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Net;
 
 namespace BookLogApp.Pages
 {
@@ -26,9 +27,8 @@ namespace BookLogApp.Pages
             if (Book != null)
             {
                 //TODO: simplify code, and error handling
-                int journalId = _journalBLL.GetJournalEntryIdForBook(id);
 
-                Journal journalEntry = _journalBLL.GetEntryAndBookById(journalId, id);
+                Journal journalEntry = _journalBLL.GetJournalEntryForBook(id);
                 if (journalEntry != null)
                 {
                     JournalEntry = journalEntry.Entry;
