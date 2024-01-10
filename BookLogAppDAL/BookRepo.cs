@@ -167,9 +167,16 @@ namespace BookLogAppDAL
                 using (SqlConnection connection = new SqlConnection(GetConnString()))
                 {
                     connection.Open();
-                    //documenteren
+
                     using (SqlTransaction transaction = connection.BeginTransaction())
                     {
+                        string sqlDeleteJournalEntry = @"DELETE FROM JournalEntries WHERE BookId=@Id";
+                        using (SqlCommand command = new SqlCommand(sqlDeleteJournalEntry, connection, transaction))
+                        {
+                            command.Parameters.Add("@Id", SqlDbType.Int).Value = id;
+                            command.ExecuteNonQuery();
+                        }
+
                         string sqlDeleteRelations = @"DELETE FROM Books_Genre WHERE BookId=@Id";
                         using (SqlCommand command = new SqlCommand(sqlDeleteRelations, connection, transaction))
                         {

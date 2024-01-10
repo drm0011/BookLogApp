@@ -52,6 +52,7 @@ namespace BookLogAppBLL
         public Journal GetEntryAndBookById(int id, int bookId)
         {
             JournalDTO journalDTO = _journalRepo.GetEntryAndBookById(id, bookId);
+            if(journalDTO!=null)
             {
                 return Mapper.ToDomainModel(journalDTO);
             }
