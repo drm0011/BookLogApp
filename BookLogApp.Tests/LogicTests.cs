@@ -1,6 +1,6 @@
-﻿using BookLogAppBLL;
-using BookLogAppInterfaces;
-using DomainModelsLayer;
+﻿using BLL;
+using Interfaces;
+using DomainModels;
 using Moq;
 using System;
 using System.Collections.Generic;

@@ -1,6 +1,6 @@
-﻿using BookLogAppBLL;
-using BookLogAppDAL;
-using DomainModelsLayer;
+﻿using BLL;
+using DAL;
+using DomainModels;
 
 namespace BookLogApp.Tests
 {
