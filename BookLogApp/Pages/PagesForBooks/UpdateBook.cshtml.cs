@@ -36,11 +36,6 @@ namespace BookLogApp.Pages.PagesForBooks
 
         public IActionResult OnPost()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-            
             _bookBLL.UpdateBook(Book);
 
             _genreBLL.DeleteBooksGenreRelationByBookId(Book.ID);
