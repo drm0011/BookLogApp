@@ -1,8 +1,9 @@
-using BookLogAppFactories;
-using BookLogAppInterfaces;
-using DomainModelsLayer;
+using BLL;
+using Factories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using DomainModels;
+using Interfaces;
 
 namespace BookLogApp.Pages.PagesForBooks
 {

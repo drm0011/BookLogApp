@@ -1,6 +1,6 @@
-using BookLogAppFactories;
-using BookLogAppInterfaces;
-using DomainModelsLayer;
+using DomainModels;
+using Factories;
+using Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 

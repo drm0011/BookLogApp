@@ -56,10 +56,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DomainModelsLayer\DomainModelsLayer.csproj">
-      <Project>{c0cb3801-bd15-4544-825f-4e3e51146791}</Project>
-      <Name>DomainModelsLayer</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DTOs\DTOs.csproj">
       <Project>{53832FF8-D8E6-4EE1-A93D-3ACD042D75BD}</Project>
       <Name>DTOs</Name>

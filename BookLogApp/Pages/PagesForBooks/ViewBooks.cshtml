@@ -5,7 +5,7 @@
     <h2 class="mb-4">Book List</h2>
 
     <ul class="list-unstyled">
-        @foreach (DomainModelsLayer.Book book in Model.Books)
+        @foreach (DomainModels.Book book in Model.Books)
         {
             <li class="mb-3 pb-3 border-bottom">
                 <h3><a href="./UpdateBook/@book.ID" class="text-decoration-none">@book.Title</a></h3>

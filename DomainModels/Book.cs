@@ -8,34 +8,50 @@ namespace DomainModels
 {
     public class Book
     {
-        public int ID { get; private set; }
-        public string Title { get; private set; }
-        public string Summary { get; private set; }
-        public string Author { get; private set; }
-        public int ISBN { get; private set; }
+        public int ID { get; set; }
+        public string Title { get; set; }
+        public string Summary { get; set; }
+        public string Author { get; set; }
+        public string ISBN { get; set; }
+        public List<Genre> Genres { get; set; }
+        public List<int> SelectedGenreIds { get; set; }
+        //TODO: add update method, private setters <---------------
 
-        public Book(string title, string author, string summary, int isbn)
+        //constructor update form binding
+        public Book() { }
+        //constructor for creating book
+        public Book(string title, string author, string summary, string isbn)
         {
-            SetBookDetails(title, author, summary);
-            ISBN = isbn;
-        }
-
-        public void SetBookDetails(string title, string author, string summary)
-        {
-            if (string.IsNullOrEmpty(title) || string.IsNullOrEmpty(author) || 
-                string.IsNullOrEmpty(summary))
-            {
-                throw new ArgumentException("Fill in the missing fields");
-            }
+            ValidateBookDetails(title, author, summary, isbn);
 
             Title = title;
             Summary = summary;
             Author = author;
+            ISBN = isbn;
         }
 
-        public void SetId(int id)
+        //constructor existing book
+        public Book(int id, string title, string author, string summary, string isbn) : this(title, author, summary, isbn)
         {
             ID = id;
         }
+
+        public void ValidateBookDetails(string title, string author, string summary, string isbn)
+        {
+            if (string.IsNullOrEmpty(title))
+            {
+                throw new ArgumentException("Title is empty.");
+            }
+            if (string.IsNullOrEmpty(author))
+            {
+                throw new ArgumentException("Author is empty.");
+            }
+            if (string.IsNullOrEmpty(isbn)) //TODO: further validation for ISBN 
+            {
+                throw new ArgumentException("Invalid ISBN.");
+            }
+        }
+
     }
 }
+

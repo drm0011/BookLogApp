@@ -1,6 +1,6 @@
-using BookLogAppBLL;
-using BookLogAppFactories;
-using BookLogAppInterfaces;
+using BLL;
+using Factories;
+using Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 

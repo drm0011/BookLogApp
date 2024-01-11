@@ -48,10 +48,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BookLogAppBLL\BookLogAppBLL.csproj">
-      <Project>{45448F4E-7C7C-4F1C-9636-63C55A883505}</Project>
-      <Name>BookLogAppBLL</Name>
-    </ProjectReference>
     <ProjectReference Include="..\BookLogAppDAL\BookLogAppDAL.csproj">
       <Project>{0FC7D78A-BCD5-41E5-9484-905C1C147C8D}</Project>
       <Name>BookLogAppDAL</Name>

@@ -23,7 +23,7 @@
         <div class="mb-3">
             <label class="form-label">Select Genre:</label>
             <div>
-                @foreach (DomainModelsLayer.Genre genre in Model.Genres)
+                @foreach (DomainModels.Genre genre in Model.Genres)
                 {
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" name="SelectedGenreIds" value="@genre.ID" />
