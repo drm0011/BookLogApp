@@ -11,31 +11,33 @@ using BookLogAppInterfaces;
 
 namespace BookLogAppDAL
 {
-    public class JournalRepo : IJournalRepo
+    public class JournalRepo:IJournalRepo
     {
         private string GetConnString(string connName = @"Server=(localdb)\mssqllocaldb;Database=BookLogApp;Trusted_Connection=True;")
         {
             return connName;
         }
-        public JournalDTO GetJournalEntryForBook(int bookId)
+
+        public JournalDTO GetEntryAndBookById(int id, int bookId) 
         {
+            JournalDTO journalDTO = null;  
             try
             {
                 using (SqlConnection connection = new SqlConnection(GetConnString()))
                 {
                     connection.Open();
-                    string sql = @"SELECT TOP 1 Id, BookId, Entry FROM JournalEntries 
-                               WHERE BookId = @BookId ORDER BY Id DESC";
+                    string sql = @"SELECT Id, BookId, Entry FROM JournalEntries WHERE Id = @Id AND BookId=@BookId";
 
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
+                        command.Parameters.Add("@Id", SqlDbType.Int).Value = id;
                         command.Parameters.Add("@BookId", SqlDbType.Int).Value = bookId;
 
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            if (reader.Read())
+                            if (reader.Read()) 
                             {
-                                return new JournalDTO
+                                journalDTO = new JournalDTO
                                 {
                                     ID = Convert.ToInt32(reader["Id"]),
                                     BookID = Convert.ToInt32(reader["BookId"]),
@@ -48,13 +50,40 @@ namespace BookLogAppDAL
             }
             catch (SqlException ex)
             {
-                throw new ApplicationException("Error occurred in retrieving the latest journal entry", ex);
+                throw new ApplicationException("Error occurred in retrieving the entry", ex);
             }
 
-            return null;
+            return journalDTO; 
         }
-    
-    public void UpsertJournalEntry(string entry, int bookId)
+        public int GetJournalEntryIdForBook(int bookId)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(GetConnString()))
+                {
+                    connection.Open();
+                    string sql = @"SELECT TOP 1 Id FROM JournalEntries WHERE BookId = @BookId ORDER BY Id DESC";
+
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.Parameters.Add("@BookId", SqlDbType.Int).Value = bookId;
+
+                        object result = command.ExecuteScalar();
+                        if (result != null)
+                        {
+                            return Convert.ToInt32(result);
+                        }
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw new ApplicationException("Error occurred in retrieving the entry ID", ex);
+            }
+
+            return 0; 
+        }
+        public void UpsertJournalEntry(string entry, int bookId)
         {
             try
             {

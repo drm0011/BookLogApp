@@ -10,8 +10,9 @@ namespace BookLogAppInterfaces
 {
     public interface IJournalBLL
     {
-        Journal GetJournalEntryForBook(int bookId);
+        Journal GetEntryAndBookById(int id, int bookId);
         void UpsertJournalEntry(string entry, int bookId);
+        int GetJournalEntryIdForBook(int bookId);
         string AnalyzeMood(string journalEntry);
     }
 }
