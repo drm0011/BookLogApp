@@ -1,41 +1,44 @@
 ﻿@page "{id:int}"
+@using DomainModels
 @model BookLogApp.Pages.PagesForBooks.UpdateBookModel
 
 <div class="container mt-4">
-    <h2 class="mb-3">Update @Model.Book.Title</h2>
+    <h2 class="mb-3">Update @Model.BookViewModel.Title</h2>
 
     <form method="post" class="needs-validation" novalidate>
-        <input type="hidden" asp-for="Book.ID" />
+        <input type="hidden" asp-for="BookViewModel.ID" />
+        <input type="hidden" asp-for="BookViewModel.ISBN" />
 
         <div class="mb-3">
             <label for="Title" class="form-label">Title:</label>
-            <input id="Title" asp-for="Book.Title" class="form-control" />
+            <input id="Title" asp-for="BookViewModel.Title" class="form-control" />
         </div>
 
         <div class="mb-3">
             <label for="Author" class="form-label">Author:</label>
-            <input id="Author" asp-for="Book.Author" class="form-control" />
+            <input id="Author" asp-for="BookViewModel.Author" class="form-control" />
         </div>
 
         <div class="mb-3">
             <label for="Summary" class="form-label">Summary:</label>
-            <textarea id="Summary" asp-for="Book.Summary" class="form-control"></textarea>
+            <textarea id="Summary" asp-for="BookViewModel.Summary" class="form-control"></textarea>
         </div>
+
 
         <div class="mb-3">
             <label class="form-label">Select Genre:</label>
             <div>
-                @foreach (DomainModels.Genre genre in Model.AllGenres)
+                @foreach (Genre genre in Model.BookViewModel.AvailableGenres)
                 {
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="SelectedGenreIds" value="@genre.ID"
-                        @(Model.SelectedGenreIds.Contains(genre.ID) ? "checked" : "") />
+                        <input class="form-check-input" type="checkbox" name="BookViewModel.SelectedGenreIds" value="@genre.ID"
+                        @(Model.BookViewModel.SelectedGenreIds.Contains(genre.ID) ? "checked" : "") />
                         <label class="form-check-label">@genre.Name</label>
                     </div>
                 }
             </div>
         </div>
 
-        <button type="submit" class="btn btn-primary">Update @Model.Book.Title</button>
+        <button type="submit" class="btn btn-primary">Update @Model.BookViewModel.Title</button>
     </form>
 </div>
