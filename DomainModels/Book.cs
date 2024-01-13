@@ -41,11 +41,11 @@ namespace DomainModels
 
         public void ValidateBookDetails(string title, string author, string summary, string isbn)
         {
-            if (string.IsNullOrWhiteSpace(title))
+            if (string.IsNullOrEmpty(title))
             {
                 throw new ArgumentException("Title is empty.");
             }
-            if (string.IsNullOrWhiteSpace(author))
+            if (string.IsNullOrEmpty(author))
             {
                 throw new ArgumentException("Author is empty.");
             }
