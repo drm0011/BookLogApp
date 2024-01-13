@@ -8,16 +8,19 @@ namespace DomainModels
 {
     public class Book
     {
-        public int ID { get; set; }
-        public string Title { get; set; }
-        public string Summary { get; set; }
-        public string Author { get; set; }
-        public string ISBN { get; set; }
+        public int ID { get; init; }
+        public string Title { get; init; }
+        public string Summary { get; init; }
+        public string Author { get; init; }
+        public string ISBN { get; init; }
         public List<Genre> Genres { get; set; }
-        public List<int> SelectedGenreIds { get; set; }
+
+        //public List<int> SelectedGenreIds { get; set; }
+
         //TODO: add update method, private setters <---------------
 
         //constructor update form binding
+        //view model ui, geen constructors nodig door init, validatie naar bll
         public Book() { }
         //constructor for creating book
         public Book(string title, string author, string summary, string isbn)
