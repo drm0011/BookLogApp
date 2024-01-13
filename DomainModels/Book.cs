@@ -41,15 +41,15 @@ namespace DomainModels
 
         public void ValidateBookDetails(string title, string author, string summary, string isbn)
         {
-            if (string.IsNullOrEmpty(title))
+            if (string.IsNullOrWhiteSpace(title))
             {
                 throw new ArgumentException("Title is empty.");
             }
-            if (string.IsNullOrEmpty(author))
+            if (string.IsNullOrWhiteSpace(author))
             {
                 throw new ArgumentException("Author is empty.");
             }
-            if (string.IsNullOrEmpty(isbn)) //TODO: further validation for ISBN 
+            if (string.IsNullOrWhiteSpace(isbn)) //TODO: further validation for ISBN 
             {
                 throw new ArgumentException("Invalid ISBN.");
             }
