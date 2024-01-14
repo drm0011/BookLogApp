@@ -24,8 +24,8 @@ namespace BLL
 
             try
             {
-                Book book = new Book(title, author, summary, isbn);
-                _bookRepo.CreateBook(book.Title, book.Author, book.Summary, book.ISBN);
+                Validation.ValidateBookDetails(title, author, summary, isbn);
+                _bookRepo.CreateBook(title, author, summary, isbn);
             }
             catch (ArgumentException ex)
             {

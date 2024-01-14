@@ -21,39 +21,8 @@ namespace DomainModels
 
         //constructor update form binding
         //view model ui, geen constructors nodig door init, validatie naar bll
-        public Book() { }
-        //constructor for creating book
-        public Book(string title, string author, string summary, string isbn)
-        {
-            ValidateBookDetails(title, author, summary, isbn);
-
-            Title = title;
-            Summary = summary;
-            Author = author;
-            ISBN = isbn;
-        }
-
-        //constructor existing book
-        public Book(int id, string title, string author, string summary, string isbn) : this(title, author, summary, isbn)
-        {
-            ID = id;
-        }
-
-        public void ValidateBookDetails(string title, string author, string summary, string isbn)
-        {
-            if (string.IsNullOrEmpty(title))
-            {
-                throw new ArgumentException("Title is empty.");
-            }
-            if (string.IsNullOrEmpty(author))
-            {
-                throw new ArgumentException("Author is empty.");
-            }
-            if (string.IsNullOrWhiteSpace(isbn)) //TODO: further validation for ISBN 
-            {
-                throw new ArgumentException("Invalid ISBN.");
-            }
-        }
+       
+       
 
     }
 }

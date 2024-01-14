@@ -12,8 +12,14 @@ namespace BLL
     {
         public static Book ToDomainModel(BookDTO dto)
         {
-            Book book = new Book(dto.ID, dto.Title, dto.Author, dto.Summary, dto.ISBN);
-            return book;
+            return new Book 
+            {
+                ID = dto.ID,
+                Title = dto.Title,
+                Summary = dto.Summary,
+                Author = dto.Author,
+                ISBN = dto.ISBN
+            };
 
         }
 
