@@ -38,7 +38,6 @@ namespace DAL
             }
             catch (SqlException ex)
             {
-                // Log the exception and rethrow a custom exception or handle it as needed
                 throw new ApplicationException("Error occurred while creating the genre", ex);
             }
         }
@@ -72,7 +71,6 @@ namespace DAL
             }
             catch (SqlException ex)
             {
-                // Log the exception details
                 throw new ApplicationException("Error occurred while retrieving genres", ex);
             }
 
@@ -106,7 +104,6 @@ namespace DAL
             }
             catch (SqlException ex)
             {
-                // Log the exception details
                 throw new ApplicationException("Error occurred in updating the genre", ex);
             }
         }
@@ -142,7 +139,6 @@ namespace DAL
             }
             catch (SqlException ex)
             {
-                // Log the exception details
                 throw new ApplicationException("Error occurred in retrieving the genre", ex);
             }
 

@@ -76,7 +76,6 @@ namespace DAL
             }
             catch (SqlException ex)
             {
-                // Log the exception details
                 throw new ApplicationException("Error occurred while retrieving books", ex);
             }
 
@@ -114,7 +113,6 @@ namespace DAL
             }
             catch (SqlException ex)
             {
-                // Log the exception details
                 throw new ApplicationException("Error occurred in updating the book", ex);
             }
         }
@@ -153,11 +151,10 @@ namespace DAL
             }
             catch (SqlException ex)
             {
-                // Log the exception details
                 throw new ApplicationException("Error occurred in retrieving the book", ex);
             }
 
-            return bookDTO; //if no book found=null, if book found return BookDTO
+            return bookDTO;
         }
 
         public void DeleteBook(int id)
@@ -232,8 +229,7 @@ namespace DAL
             }
             catch (SqlException ex)
             {
-
-                throw;
+                throw new ApplicationException("Error occurred loading genres", ex);
             }
             return genreList;
         }
