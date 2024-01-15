@@ -21,9 +21,7 @@ namespace DomainModels
 
         //constructor update form binding
         //view model ui, geen constructors nodig door init, validatie naar bll
-       
-       
-
+      
     }
 }
 
