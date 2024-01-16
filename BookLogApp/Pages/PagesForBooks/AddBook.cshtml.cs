@@ -40,9 +40,6 @@ namespace BookLogApp.Pages.PagesForBooks
                 return Page();
             }
 
-            
-
-
             try
             {
                 //BLL method to create the book

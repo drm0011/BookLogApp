@@ -61,13 +61,24 @@ namespace BookLogApp.Pages.PagesForBooks
                 ISBN = BookViewModel.ISBN
             };
 
-            _bookBLL.UpdateBook(bookToUpdate);
-
-            _genreBLL.DeleteBooksGenreRelationByBookId(bookToUpdate.ID);
-            foreach (int genreId in BookViewModel.SelectedGenreIds)
+            try
             {
-                _genreBLL.CreateBooksGenreRelation(bookToUpdate.ID, genreId);
+                _bookBLL.UpdateBook(bookToUpdate);
+
+                _genreBLL.DeleteBooksGenreRelationByBookId(bookToUpdate.ID);
+                foreach (int genreId in BookViewModel.SelectedGenreIds)
+                {
+                    _genreBLL.CreateBooksGenreRelation(bookToUpdate.ID, genreId);
+                }
             }
+            catch (ArgumentException ex)
+            {
+
+                ModelState.AddModelError(string.Empty, ex.Message);
+                return Page();
+            }
+
+            
             return RedirectToPage("./ViewBooks");
         }
     }

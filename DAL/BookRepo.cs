@@ -99,9 +99,17 @@ namespace DAL
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         command.Parameters.Add("@Title", SqlDbType.VarChar).Value = title;
-                        command.Parameters.Add("@Summary", SqlDbType.VarChar).Value = summary;
                         command.Parameters.Add("@Author", SqlDbType.VarChar).Value = author;
                         command.Parameters.Add("@Id", SqlDbType.Int).Value = id;
+
+                        if (string.IsNullOrEmpty(summary))
+                        {
+                            command.Parameters.Add("@Summary", SqlDbType.VarChar).Value = DBNull.Value;
+                        }
+                        else
+                        {
+                            command.Parameters.Add("@Summary", SqlDbType.VarChar).Value = summary;
+                        }
 
                         int affectedRows = command.ExecuteNonQuery();
                         if (affectedRows == 0)

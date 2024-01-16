@@ -12,11 +12,13 @@
         <div class="mb-3">
             <label for="Title" class="form-label">Title:</label>
             <input id="Title" asp-for="BookViewModel.Title" class="form-control" />
+            <span asp-validation-for="BookViewModel.Title" class="text-danger"></span>
         </div>
 
         <div class="mb-3">
             <label for="Author" class="form-label">Author:</label>
             <input id="Author" asp-for="BookViewModel.Author" class="form-control" />
+            <span asp-validation-for="BookViewModel.Author" class="text-danger"></span>
         </div>
 
         <div class="mb-3">

@@ -10,7 +10,7 @@ namespace DomainModels
     {
         public int ID { get; init; }
         public string Title { get; init; }
-        public string Summary { get; init; }
+        public string? Summary { get; init; }
         public string Author { get; init; }
         public string ISBN { get; init; }
         public List<Genre> Genres { get; set; }
