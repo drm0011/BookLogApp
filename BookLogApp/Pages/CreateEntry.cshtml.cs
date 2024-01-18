@@ -50,6 +50,7 @@ namespace BookLogApp.Pages
             {
                 AnalyzedMood = _journalBLL.AnalyzeMood(JournalEntry);
             }
+            _journalBLL.UpsertJournalEntry(JournalEntry, Book.ID);
             return Page();
         }
     }
