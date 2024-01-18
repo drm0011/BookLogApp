@@ -19,7 +19,15 @@ namespace BLL
 
         public void CreateGenre(string name)
         {
-            _genreRepo.CreateGenre(name);
+            try
+            {
+                Validation.ValidateGenre(name);
+                _genreRepo.CreateGenre(name);
+            }
+            catch (ArgumentException ex)
+            {
+                throw new ArgumentException("An error occurred while creating the genre: " + ex.Message);
+            }
         }
 
         public void DeleteGenre(int id)

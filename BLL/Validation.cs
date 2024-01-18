@@ -23,5 +23,13 @@ namespace BLL
                 throw new ArgumentException("Invalid ISBN.");
             }
         }
+
+        public static void ValidateGenre(string name)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new ArgumentException("Genre is empty.");
+            }
+        }
     }
 }

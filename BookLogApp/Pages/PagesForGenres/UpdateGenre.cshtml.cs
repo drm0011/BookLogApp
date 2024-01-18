@@ -1,3 +1,4 @@
+using BookLogApp.ViewModels;
 using DomainModels;
 using Factories;
 using Interfaces;
@@ -13,11 +14,17 @@ namespace BookLogApp.Pages.PagesForGenres
         {
             _genreBLL=Factory.CreateGenreBLL();
         }
+
         [BindProperty]
-        public Genre Genre { get; set; }    
+        public GenreViewModel GenreViewModel { get; set; }
         public void OnGet(int id)
         {
-            Genre=_genreBLL.GetGenreById(id);
+            Genre genre = _genreBLL.GetGenreById(id);
+            GenreViewModel = new GenreViewModel
+            {
+                ID = genre.ID,
+                Name = genre.Name
+            };
         }
 
         public IActionResult OnPost()
@@ -27,7 +34,22 @@ namespace BookLogApp.Pages.PagesForGenres
                 return Page();
             }
 
-            _genreBLL.UpdateGenre(Genre);
+            Genre genreToUpdate = new Genre
+            {
+                ID = GenreViewModel.ID,
+                Name = GenreViewModel.Name
+            };
+
+            try
+            {
+                _genreBLL.UpdateGenre(genreToUpdate);
+            }
+            catch (ArgumentException ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+                return Page();
+            }
+
             return RedirectToPage("./ViewGenres");
         }
     }

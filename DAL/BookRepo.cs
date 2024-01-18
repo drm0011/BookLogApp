@@ -32,9 +32,16 @@ namespace DAL
                     {
                         command.Parameters.Add("@Title", SqlDbType.VarChar).Value = title;
                         command.Parameters.Add("@Author", SqlDbType.VarChar).Value = author;
-                        command.Parameters.Add("@Summary", SqlDbType.VarChar).Value = summary;
                         command.Parameters.Add("@ISBN", SqlDbType.VarChar).Value = isbn;
 
+                        if (string.IsNullOrEmpty(summary))
+                        {
+                            command.Parameters.Add("@Summary", SqlDbType.VarChar).Value = DBNull.Value;
+                        }
+                        else
+                        {
+                            command.Parameters.Add("@Summary", SqlDbType.VarChar).Value = summary;
+                        }
                         command.ExecuteNonQuery();
                     }
                 }

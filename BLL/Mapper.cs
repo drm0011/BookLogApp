@@ -37,8 +37,11 @@ namespace BLL
 
         public static Genre ToDomainModel(GenreDTO dto)
         {
-            Genre genre = new Genre(dto.ID, dto.Name);
-            return genre;
+            return new Genre
+            {
+                ID = dto.ID,
+                Name = dto.Name
+            };
         }
 
         public static GenreDTO ToDTO(GenreDTO domainModel)

@@ -5,7 +5,6 @@
     <h2 class="mb-3">Add Book</h2>
 
     <form method="post" class="needs-validation" novalidate>
-        <div asp-validation-summary="All" class="text-danger mb-3"></div>
 
         <div class="mb-3">
             <label for="Title" class="form-label">Title:</label>
@@ -22,7 +21,6 @@
         <div class="mb-3">
             <label for="Summary" class="form-label">Summary:</label>
             <textarea id="Summary" name="Summary" asp-for="Summary" class="form-control"></textarea>
-            <span asp-validation-for="Summary" class="text-danger"></span>
         </div>
 
         <div class="mb-3">
