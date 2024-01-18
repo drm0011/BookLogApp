@@ -24,7 +24,7 @@ namespace BookLogApp.Pages.PagesForBooks
         public string Author { get; set; }
 
         [BindProperty]
-        public string Summary { get; set; }
+        public string? Summary { get; set; }
 
         [BindProperty]
         public string ISBN { get; set; }
@@ -42,15 +42,12 @@ namespace BookLogApp.Pages.PagesForBooks
 
             try
             {
-                //BLL method to create the book
                 _bookBLL.CreateBook(Title, Author, Summary, ISBN);
 
                 return RedirectToPage("/Index");
             }
             catch (ArgumentException ex)
             {
-
-                // Add the error to the ModelState to display in the view
                 ModelState.AddModelError(string.Empty, ex.Message);
                 return Page();
             }
