@@ -16,11 +16,6 @@ namespace DomainModels
         public List<Genre> Genres { get; set; }
 
         //public List<int> SelectedGenreIds { get; set; }
-
-        //TODO: add update method, private setters <---------------
-
-        //constructor update form binding
-        //view model ui, geen constructors nodig door init, validatie naar bll
       
     }
 }
