@@ -10,11 +10,11 @@ namespace BLL
     {
         public static void ValidateBookDetails(string title, string author, string summary, string isbn)
         {
-            if (string.IsNullOrEmpty(title)) //is null or white space?
+            if (string.IsNullOrWhiteSpace(title)) //is null or white space?
             {
                 throw new ArgumentException("Title is empty.");
             }
-            if (string.IsNullOrEmpty(author))
+            if (string.IsNullOrWhiteSpace(author))
             {
                 throw new ArgumentException("Author is empty.");
             }
@@ -26,7 +26,7 @@ namespace BLL
 
         public static void ValidateGenre(string name)
         {
-            if (string.IsNullOrEmpty(name))
+            if (string.IsNullOrWhiteSpace(name))
             {
                 throw new ArgumentException("Genre is empty.");
             }
@@ -34,7 +34,7 @@ namespace BLL
 
         public static void ValidateEntry(string entry, int bookId)
         {
-            if (string.IsNullOrEmpty(entry))
+            if (string.IsNullOrWhiteSpace(entry))
             {
                 throw new ArgumentException("Journal entry is empty.");
             }
