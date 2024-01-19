@@ -55,8 +55,12 @@ namespace BLL
 
         public static Journal ToDomainModel(JournalDTO dto)
         {
-            Journal journal = new Journal(dto.ID, dto.Entry, dto.BookID);
-            return journal;
+            return new Journal
+            {
+                ID = dto.ID,
+                Entry = dto.Entry,
+                BookID = dto.BookID
+            };
         }
 
         public static JournalDTO ToDTO(JournalDTO domainModel)

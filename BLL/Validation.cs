@@ -31,5 +31,17 @@ namespace BLL
                 throw new ArgumentException("Genre is empty.");
             }
         }
+
+        public static void ValidateEntry(string entry, int bookId)
+        {
+            if (string.IsNullOrEmpty(entry))
+            {
+                throw new ArgumentException("Journal entry is empty.");
+            }
+            if (bookId == 0)
+            {
+                throw new ArgumentException("No book selected.");
+            }
+        }
     }
 }

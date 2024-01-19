@@ -14,7 +14,7 @@ namespace BookLogApp.Pages
         public Journal Journal { get; set; }
         public string AnalyzedMood { get; set; }
         [BindProperty]
-        public string JournalEntry { get; set; }
+        public string Entry { get; set; }
         public CreateEntryModel()
         {
             _bookBLL = Factory.CreateBookBLL();
@@ -31,26 +31,44 @@ namespace BookLogApp.Pages
                 Journal journalEntry = _journalBLL.GetEntryAndBookById(journalId, id);
                 if (journalEntry != null)
                 {
-                    JournalEntry = journalEntry.Entry;
+                    Entry = journalEntry.Entry;
                 }
             }
         }
 
         public IActionResult OnPost(int id)
         {
-            Book = _bookBLL.GetBookById(id);
-            _journalBLL.UpsertJournalEntry(JournalEntry, Book.ID);
+            try
+            {
+                 Book = _bookBLL.GetBookById(id);
+                _journalBLL.UpsertJournalEntry(Entry, Book.ID);
+            }
+            catch (ArgumentException ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+                return Page();
+            }
+            
             return Page();
         }
 
         public IActionResult OnPostAnalyze(int id)
         {
-            Book = _bookBLL.GetBookById(id);
-            if (!string.IsNullOrEmpty(JournalEntry))
+            try
             {
-                AnalyzedMood = _journalBLL.AnalyzeMood(JournalEntry);
+                Book = _bookBLL.GetBookById(id);
+                if (!string.IsNullOrEmpty(Entry))
+                {
+                    AnalyzedMood = _journalBLL.AnalyzeMood(Entry);
+                }
+                _journalBLL.UpsertJournalEntry(Entry, Book.ID);
             }
-            _journalBLL.UpsertJournalEntry(JournalEntry, Book.ID);
+            catch (ArgumentException ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+                return Page();
+            }
+            
             return Page();
         }
     }

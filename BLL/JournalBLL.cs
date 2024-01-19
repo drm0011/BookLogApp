@@ -21,6 +21,7 @@ namespace BLL
                 { "Happy", new List<(string word, int score)> { ("joy", 1), ("happy", 1), ("delighted", 2) } },
                 { "Sad", new List<(string word, int score)> { ("sad", 1), ("depressed", 2), ("unhappy", 1) } },
                 { "Interesting", new List<(string word, int score)> {("interesting", 1), ("stimulating", 1)} },
+                { "Boring", new List<(string word, int score)> {("boring", 2), ("uninteresting", 1)} }
             };
         }
         public string AnalyzeMood(string journalEntry)
@@ -63,6 +64,7 @@ namespace BLL
         {
             try
             {
+                Validation.ValidateEntry(entry, bookId);
                 _journalRepo.UpsertJournalEntry(entry, bookId);
             }
             catch (Exception)

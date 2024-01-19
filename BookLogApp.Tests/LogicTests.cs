@@ -18,11 +18,15 @@ namespace BookLogApp.Tests
             Mock<IGenreRepo> mockRepo = new Mock<IGenreRepo>();
             GenreBLL genreBLL = new GenreBLL(mockRepo.Object);
 
-            Book book = new Book("Book Title", "Book Author", "Book Summary", "12345");
-            Genre genre = new Genre { Name = "Fiction" };
-
-            book.ID = 1;
-            genre.ID = 1;
+            Book book = new Book
+            {
+                ID = 1,
+                Title= "Book Title", 
+                Author= "Book Author", 
+                Summary="Book Summary", 
+                ISBN="12345" 
+            };
+            Genre genre = new Genre {ID=1, Name = "Fiction" };
 
             genreBLL.CreateBooksGenreRelation(book.ID, genre.ID);
 
